@@ -1,6 +1,6 @@
 # prompt_engine: Evaluate your model using advanced prompt strategies
 
-This repository serves as a comprehensive platform for evaluating large language models (LLMs) utilizing diverse prompt engineering techniques aimed at enhancing performance on medical benchmarks. Our goal is to explore how prompt engineering impact LLMs' accuracy, reliability, and overall usefulness in addressing complex medical scenarios.
+This repository serves as a comprehensive platform for evaluating large language models (LLMs) utilizing diverse prompt engineering techniques aimed at enhancing performance on medical benchmarks. Our goal is to explore how prompt engineering impact LLMs' accuracy, reliability, and overall usefulness in addressing complex medical scenarios. This repo was first created to support the [Aloe](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) model.
 
 Central to our investigation were efforts to exploit the inherent reasoning capabilities of LLMs by employing sophisticated prompt engineering approaches towards medical applications. Among the techniques adopted include:
 - **Self-Consistency Chain-of-Thought (SC-CoT)**: An iterative process wherein the LLM generates plausible explanations supporting each proposed solution before settling on a final answer. By encouraging systematic thinking, SC-CoT helps enhance both the confidence and veracity of generated responses.
@@ -137,6 +137,13 @@ When the generations of a execution, the evaluation procedure starts, and genera
 
 ### Databases
 When running Medprompt, we allow the utilization of custom databases. When a databases is specified in the configuration, the generation of training/validation CoT examples will be skipped and the examples of the databases will be used instead. However, the database must have the same format as the output generations file, detailed above. Feel free to generate your custom databases to test the Medprompt technique.
+
+### Citations
+If you use this repository in a published work, please cite the following papers as source:
+
+Gururajan, A.K., Lopez-Cuena, E., Bayarri-Planas, J., Tormos, A., Hinjos, D., Bernabeu-Perez, P., Arias-Duart, A., Martin-Torres, P.A., Urcelay-Ganzabal, L., Gonzalez-Mallo, M. and Alvarez-Napagao, S., 2024. Aloe: A Family of Fine-tuned Open Healthcare LLMs. arXiv preprint arXiv:2405.01886.
+
+
 
 
 
