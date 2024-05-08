@@ -1,0 +1,54 @@
+vllm:
+  model: "Qwen/Qwen-72B"
+  tokenizer_mode:
+  trust_remote_code: True
+  tensor_parallel_size: 4
+  dtype: bfloat16
+  quantization:
+  revision:
+  tokenizer_revision:
+  seed:
+  gpu_memory_utilization:
+  swap_space:
+  enforce_eager:
+  max_context_len_to_capture:
+  disable_custom_all_reduce:
+  max_model_len: 8192
+
+config:
+  dataset: "mmlu"
+  subject: "all"
+  overwrite: True
+  type: "medprompt"
+  vector_database: "chromadb"
+  embedding: "NeuML/pubmedbert-base-embeddings"
+  k: 5
+  ensembles: 5
+  shuffle: True
+  database: "database_medmcqa_reduced"
+
+sampling_params:
+  n:
+  best_of:
+  presence_penalty:
+  frequency_penalty:
+  repetition_penalty:
+  temperature:
+  top_p:
+  top_k:
+  min_p:
+  seed:
+  use_beam_search:
+  length_penalty:
+  early_stopping:
+  stop:
+  stop_token_ids:
+  include_stop_str_in_output:
+  ignore_eos:
+  max_tokens: 500
+  logprobs:
+  prompt_logprobs:
+  skip_special_tokens:
+  spaces_between_special_tokens:
+  logits_processors:
+

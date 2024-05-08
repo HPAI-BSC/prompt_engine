@@ -1,0 +1,321 @@
+{
+    "adbe8a48-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_0",
+        "question": "Type I muscle fibres have the following characteristics:",
+        "correct_answer": "D",
+        "options": {
+            "A": "white, glycolytic, slow contracting.",
+            "B": "white, oxidative, slow contracting.",
+            "C": "red, oxidative, fast contracting.",
+            "D": "red, oxidative, slow contracting."
+        }
+    },
+    "adbe8aca-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_1",
+        "question": "Mr Wood has just returned from surgery and has severe internal bleeding. Which of the following observations would you NOT expect to find on undertaking post-operative observations?",
+        "correct_answer": "B",
+        "options": {
+            "A": "Hypotension.",
+            "B": "Bradycardia.",
+            "C": "Confusion",
+            "D": "Tachypnoea."
+        }
+    },
+    "adbe8b06-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_2",
+        "question": "Which of the following represents Cushing's response?",
+        "correct_answer": "D",
+        "options": {
+            "A": "Low blood pressure, tachycardia.",
+            "B": "High blood pressure, tachycardia.",
+            "C": "Low blood pressure, bradycardia.",
+            "D": "High blood pressure, bradycardia."
+        }
+    },
+    "adbe8b42-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_3",
+        "question": "How many 'true' movements are available at the hip?",
+        "correct_answer": "C",
+        "options": {
+            "A": "4",
+            "B": "5",
+            "C": "6",
+            "D": "7"
+        }
+    },
+    "adbe8b74-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_4",
+        "question": "For patients with asthma, how many times a day should a peak flow reading be taken?",
+        "correct_answer": "B",
+        "options": {
+            "A": "Daily.",
+            "B": "Twice a day.",
+            "C": "Three times a week.",
+            "D": "Once a week."
+        }
+    },
+    "adbe8bb0-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_5",
+        "question": "Which of the following is incorrect?",
+        "correct_answer": "D",
+        "options": {
+            "A": "Dentures should be removed at night.",
+            "B": "Dentures should be cleaned on removal from mouth.",
+            "C": "Dentures should be stored in a named pot.",
+            "D": "Dentures should be stored dry."
+        }
+    },
+    "adbe8bec-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_6",
+        "question": "Why might you choose to use a silicone catheter (as of 2020 medical knowledge)?",
+        "correct_answer": "B",
+        "options": {
+            "A": "Because the patient does not like the others.",
+            "B": "Because the patient is allergic to latex.",
+            "C": "Because there are no other kinds of catheter at your disposal.",
+            "D": "Because it is cheaper."
+        }
+    },
+    "adbe8c1e-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_7",
+        "question": "The recommended dose of creatine to load the muscles of a 70 kg man within one week is:",
+        "correct_answer": "D",
+        "options": {
+            "A": "2 g/day.",
+            "B": "5 g/day.",
+            "C": "10 g/day.",
+            "D": "20 g/day."
+        }
+    },
+    "adbe8c5a-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_8",
+        "question": "The coding sequences of genes are called:",
+        "correct_answer": "B",
+        "options": {
+            "A": "extrons.",
+            "B": "exons.",
+            "C": "introns.",
+            "D": "codons."
+        }
+    },
+    "adbe8c8c-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_9",
+        "question": "Which of the following is true with regards to the anatomy involved in the rectal examination?",
+        "correct_answer": "D",
+        "options": {
+            "A": "The sacrum is palpated anteriorly",
+            "B": "The pubic bone is palpated anteriorly in both sexes",
+            "C": "In the male the testes can be appreciated anteriorly",
+            "D": "The cervix can sometimes be felt anteriorly in the female"
+        }
+    },
+    "adbe8cc8-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_10",
+        "question": "Using a large volume spacer will improve the deposition of medication by:",
+        "correct_answer": "B",
+        "options": {
+            "A": "10-15%",
+            "B": "40-60%",
+            "C": "99-100%",
+            "D": "30-40%"
+        }
+    },
+    "adbe8cfa-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_11",
+        "question": "Which one of the following is not a use for intravenous infusions?",
+        "correct_answer": "D",
+        "options": {
+            "A": "Administer prescribed intravenous fluid.",
+            "B": "Administer dyes or contrast media for radiographic examinations.",
+            "C": "Administer prescribed blood products.",
+            "D": "To orally hydrate a patient."
+        }
+    },
+    "adbe8d36-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_12",
+        "question": "During exercise, adrenaline secretion from the adrenal glands is stimulated by:",
+        "correct_answer": "D",
+        "options": {
+            "A": "increased plasma glucose.",
+            "B": "increased plasma fatty acids.",
+            "C": "increased plasma ACTH.",
+            "D": "increased sympathetic nerve activity."
+        }
+    },
+    "adbe8d68-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_13",
+        "question": "Which of the following is true of blackouts and dizziness?",
+        "correct_answer": "A",
+        "options": {
+            "A": "Confusion following a blackout is strongly suggestive of a fit",
+            "B": "Pre-syncope is another term for a blackout",
+            "C": "An epileptic fit always leads to the loss of consciousness",
+            "D": "In the investigation of a blackout a blood sugar estimation is of no value"
+        }
+    },
+    "adbe8da4-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_14",
+        "question": "Which of the following is true about abdominal pain?",
+        "correct_answer": "C",
+        "options": {
+            "A": "Peptic ulcer pain is usually experienced in the hypogastrium",
+            "B": "The pain of irritable bowel syndrome is usually well localised",
+            "C": "The pain of oesophagitis is usually retrosternal in site",
+            "D": "The pain of pancreatitis usually radiates to the groin"
+        }
+    },
+    "adbe8dd6-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_15",
+        "question": "The following are features of Alzheimer's disease except:",
+        "correct_answer": "D",
+        "options": {
+            "A": "short-term memory loss.",
+            "B": "confusion.",
+            "C": "poor attention.",
+            "D": "drowsiness."
+        }
+    },
+    "adbe8e12-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_16",
+        "question": "Which of the following is true about radial nerve palsy?",
+        "correct_answer": "C",
+        "options": {
+            "A": "The radial nerve arises from the lateral cord of the brachial plexus",
+            "B": "It is associated with sensory loss over the medial half of the hand",
+            "C": "It leads to wrist drop",
+            "D": "It can occur due to a superficial laceration over the wrist"
+        }
+    },
+    "adbe8e44-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_17",
+        "question": "How can several different proteins be produced from the same gene?",
+        "correct_answer": "C",
+        "options": {
+            "A": "By selective transcription of different parts of the DNA in the gene.",
+            "B": "By doubling or tripling the length of the mRNA molecule produced from the primary transcript.",
+            "C": "The primary transcripts of many genes can be spliced in various ways to produce different mRNAs, a process known as alternative RNA splicing.",
+            "D": "By splicing of the mRNA molecule after it has been formed from the primary transcript."
+        }
+    },
+    "adbe8e80-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_18",
+        "question": "How long can a long-term catheter stay in situ?",
+        "correct_answer": "C",
+        "options": {
+            "A": "4 weeks.",
+            "B": "7 weeks.",
+            "C": "12 weeks.",
+            "D": "20 weeks."
+        }
+    },
+    "adbe8eb2-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_19",
+        "question": "Stridor is described as:",
+        "correct_answer": "D",
+        "options": {
+            "A": "A wheezing sound.",
+            "B": "A gurgling sound.",
+            "C": "A rattling sound.",
+            "D": "A high-pitched sound."
+        }
+    },
+    "adbe8eee-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_20",
+        "question": "What is cardiac output?",
+        "correct_answer": "A",
+        "options": {
+            "A": "Stroke volume \u00d7 heart rate.",
+            "B": "Systemic vascular resistance \u00d7 heart rate.",
+            "C": "Blood pressure \u00d7 heart rate.",
+            "D": "Preload \u00d7 stroke volume."
+        }
+    },
+    "adbe8f20-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_21",
+        "question": "Which of the following is true about the assessment of gait?",
+        "correct_answer": "B",
+        "options": {
+            "A": "A stamping gait is caused by bilateral foot drop",
+            "B": "An antalgic gait is caused by a painful leg",
+            "C": "A waddling gait is sometimes called a steppage gait",
+            "D": "An apraxic gait is due to hysteria"
+        }
+    },
+    "adbe8f5c-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_22",
+        "question": "What should be done after catheterization is carried out?",
+        "correct_answer": "C",
+        "options": {
+            "A": "The patient should be thanked.",
+            "B": "The patient should be advised when to drink.",
+            "C": "Document catheterization in the patient's notes.",
+            "D": "The patient should be washed."
+        }
+    },
+    "adbe8f8e-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_23",
+        "question": "In a patient with chest pain which of these features is most suggestive of a myocardial infarction?",
+        "correct_answer": "B",
+        "options": {
+            "A": "Very severe pain",
+            "B": "Sweating and vomiting",
+            "C": "Pain has lasted for over a week",
+            "D": "Pain is sharp like a knife"
+        }
+    },
+    "adbe8fca-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_24",
+        "question": "In the assessment of visual fields which of the following is true?",
+        "correct_answer": "C",
+        "options": {
+            "A": "A lesion at the optic chiasma leads to a homonymous hemianopia",
+            "B": "Impulses from the retinal leave the eye via the optic radiation",
+            "C": "An enlarged blind spot may occur because of papilloedema",
+            "D": "The visual field examination maps out a patient's central vision"
+        }
+    },
+    "adbe8ffc-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_25",
+        "question": "Who set the world record for the mile race in 1886?",
+        "correct_answer": "D",
+        "options": {
+            "A": "R Bannister",
+            "B": "S Coe",
+            "C": "J DiMaggio",
+            "D": "WG George"
+        }
+    },
+    "adbe9038-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_26",
+        "question": "What is erythema?",
+        "correct_answer": "B",
+        "options": {
+            "A": "Inflammation of the sweat glands.",
+            "B": "Redness of the skin due to congestion of the capillaries.",
+            "C": "A form of skin infection.",
+            "D": "Redness of the skin caused by pressure."
+        }
+    },
+    "adbe906a-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_27",
+        "question": "When branched chain amino acids are deaminated in muscle, the ammonia produced is mostly:",
+        "correct_answer": "B",
+        "options": {
+            "A": "converted into arginine and released from the muscle.",
+            "B": "converted into alanine and glutamine and released from the muscle.",
+            "C": "converted into urea and released from the muscle.",
+            "D": "used to synthesise purines and pyrimidines in the muscle."
+        }
+    },
+    "adbe90a6-fe1d-11ee-b601-0242ac140006": {
+        "id": "clinical_knowledge_val_28",
+        "question": "Which of the following is true regarding the examination of the legs?",
+        "correct_answer": "D",
+        "options": {
+            "A": "Sustained clonus occurs with hypotonia",
+            "B": "Clonus can only be demonstrated at the ankle",
+            "C": "The root value of hip flexion is L4, L5",
+            "D": "The root value of toe extension is L5"
+        }
+    }
+}

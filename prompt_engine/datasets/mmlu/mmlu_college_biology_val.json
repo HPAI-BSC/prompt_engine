@@ -1,0 +1,178 @@
+{
+    "adbd6172-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_0",
+        "question": "Which of the following is the most direct cause of polyteny in somatic cells of certain organisms?",
+        "correct_answer": "C",
+        "options": {
+            "A": "RNA transcription",
+            "B": "Supercoiling of chromatin",
+            "C": "Chromosome replication without cell division",
+            "D": "Chromosome recombination"
+        }
+    },
+    "adbd61f4-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_1",
+        "question": "All of the following statements about muscle contraction are true EXCEPT:",
+        "correct_answer": "D",
+        "options": {
+            "A": "The ends of actin filaments move closer together.",
+            "B": "The length of myosin filaments does not change.",
+            "C": "Calcium-troponin binding precedes actin-myosin binding.",
+            "D": "Calcium-tropomyosin binding precedes actin-myosin binding."
+        }
+    },
+    "adbd6230-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_2",
+        "question": "Short-term changes in plant growth rate mediated by the plant hormone auxin are hypothesized to result from",
+        "correct_answer": "B",
+        "options": {
+            "A": "loss of turgor pressure in the affected cells",
+            "B": "increased extensibility of the walls of affected cells",
+            "C": "suppression of metabolic activity in affected cells",
+            "D": "cytoskeletal rearrangements in the affected cells"
+        }
+    },
+    "adbd626c-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_3",
+        "question": "RNA is thought to have played an important role in the evolution of life for which of the following reasons?\nI. It occurred in great quantities on early Earth.\nII. It can self-replicate via a complementary chain.\nIII. It can catalyze some cellular functions.",
+        "correct_answer": "D",
+        "options": {
+            "A": "I only",
+            "B": "II only",
+            "C": "III only",
+            "D": "II and III"
+        }
+    },
+    "adbd629e-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_4",
+        "question": "An organism with a lobed thallus, rhizoids, and gemmae is a",
+        "correct_answer": "B",
+        "options": {
+            "A": "moss",
+            "B": "liverwort",
+            "C": "fern",
+            "D": "mushroom"
+        }
+    },
+    "adbd62da-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_5",
+        "question": "One hypothesis posed by evolutionary biologists to account for an organism's altruistic behavior in social groups is that of kin selection. According to the kin selection theory, the risk incurred by a bird that sounds an alarm call due to a nearby predator may be offset by the fact that",
+        "correct_answer": "C",
+        "options": {
+            "A": "the alarm call induces the predator to abandon its hunt",
+            "B": "the alarm call allows the bird to gain protection at the center of a flock",
+            "C": "the alarm call will benefit those members with whom the bird shares a percentage of its genes",
+            "D": "the bird will gain the same early warning advantage from another member of the flock at a future time"
+        }
+    },
+    "adbd630c-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_6",
+        "question": "A plant that possesses swimming sperm, xylem with tracheids, independent gametophyte and sporophyte phases, and no seeds is probably most closely related to",
+        "correct_answer": "C",
+        "options": {
+            "A": "mosses",
+            "B": "pines",
+            "C": "ferns",
+            "D": "liverworts"
+        }
+    },
+    "adbd633e-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_7",
+        "question": "Which of the following is NOT a characteristic of an oligotrophic lake?",
+        "correct_answer": "C",
+        "options": {
+            "A": "Low nutrient levels",
+            "B": "High altitudes",
+            "C": "Shallow water",
+            "D": "Sand or gravel bottom"
+        }
+    },
+    "adbd637a-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_8",
+        "question": "Evidence that sea urchins are more closely related to frogs than they are to snails is that echinoderms and chordates share which of the following embryological features?",
+        "correct_answer": "D",
+        "options": {
+            "A": "An embryonic notochord disappears by the adult stage.",
+            "B": "Larvae undergo metamorphosis.",
+            "C": "Early embryos are unable to compensate for missing cells.",
+            "D": "The pore that forms the mouth develops after the pore that forms the anus."
+        }
+    },
+    "adbd63ac-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_9",
+        "question": "Which of the following is NOT a correct statement concerning elastin?",
+        "correct_answer": "D",
+        "options": {
+            "A": "It is a component of large blood vessels.",
+            "B": "Its secondary structure consists primarily of alpha helices.",
+            "C": "It is secreted into the extracellular matrix of tissues.",
+            "D": "It is a globular protein found in connective tissue."
+        }
+    },
+    "adbd63e8-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_10",
+        "question": "In cloning experiments on the frog Xenopus laevis, nuclei were removed from intestinal cells of tadpoles and transplanted into zygotes whose nuclei had been removed. A small percent of these zygotes developed into normal frogs, suggesting that",
+        "correct_answer": "D",
+        "options": {
+            "A": "intestinal cells can be transformed into all cell types",
+            "B": "frogs do not have the same developmental constraints as other species",
+            "C": "intestinal cell nuclei are highly specialized",
+            "D": "the genomes of all somatic cells are equivalent"
+        }
+    },
+    "adbd641a-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_11",
+        "question": "Which of the following sets of reactions occurs in the stroma of the chloroplast in plant cells?",
+        "correct_answer": "A",
+        "options": {
+            "A": "Calvin cycle",
+            "B": "Krebs cycle",
+            "C": "Fermentation",
+            "D": "Decarboxylation"
+        }
+    },
+    "adbd6456-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_12",
+        "question": "Which of the following provides visual evidence of genetic recombination during meiosis?",
+        "correct_answer": "D",
+        "options": {
+            "A": "Centromeres",
+            "B": "Synaptonemal complexes",
+            "C": "Haploid nuclei",
+            "D": "Chiasmata"
+        }
+    },
+    "adbd6488-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_13",
+        "question": "Which of the following occurred first during the separation of the elements of Pangaea through continental drift?",
+        "correct_answer": "A",
+        "options": {
+            "A": "Gondwana and Laurasia were formed.",
+            "B": "Africa separated from South America.",
+            "C": "India collided with Eurasia to form the Himalayan mountain chain.",
+            "D": "Australia separated from the rest of the continental landmasses."
+        }
+    },
+    "adbd64ba-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_14",
+        "question": "Which of the following traits do prokaryotes and eukaryotes have in common?",
+        "correct_answer": "C",
+        "options": {
+            "A": "A single chromosome carries the entire genome.",
+            "B": "Chromosomes are circular.",
+            "C": "Replication is bidirectional.",
+            "D": "Molecular weight of respective DNA is comparable."
+        }
+    },
+    "adbd64f6-fe1d-11ee-b601-0242ac140006": {
+        "id": "college_biology_val_15",
+        "question": "All of the following are required procedures in order to clone specific mRNA molecules EXCEPT",
+        "correct_answer": "B",
+        "options": {
+            "A": "extracting mRNA from cells",
+            "B": "cleaving the full genome of a cell into fragments",
+            "C": "creating a cDNA molecule",
+            "D": "converting single-stranded cDNA into double-stranded cDNA"
+        }
+    }
+}
