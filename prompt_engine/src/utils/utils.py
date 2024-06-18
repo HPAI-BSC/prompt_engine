@@ -10,7 +10,7 @@ from tqdm import tqdm
 from .logger import init_logger
 
 logger = init_logger(__name__)
-
+random.seed(8)
 
 def filter_non_empty(dictionary):
     """
@@ -282,6 +282,7 @@ def rerank_examples(problems, examples, config):
 
         selected_examples[test_id]["examples"]["original"]["ids"] = examples[test_id]["examples"]
         selected_examples[test_id]["examples"]["original"]["questions"] = examples[test_id]["solutions"]
+        selected_examples[test_id]["examples"]["original"]["scores"] = examples[test_id]["scores"]
 
 
         for i in top_rerank:
@@ -289,6 +290,5 @@ def rerank_examples(problems, examples, config):
             selected_examples[test_id]["scores"].append(examples[test_id]["scores"][i])
             selected_examples[test_id]["examples"]["reranked"]["ids"].append(examples[test_id]["examples"][i])
             selected_examples[test_id]["examples"]["reranked"]["questions"].append(examples[test_id]["solutions"][i])
-            selected_examples[test_id]["examples"].append(examples[test_id]["examples"][i])
 
     return selected_examples

@@ -47,16 +47,14 @@ class ChromaDatabase(VectorDatabase):
         basename_file = os.path.basename(file)  # Problems filename will be the key for filtering problems in the database
 
         if collection.count() < len(problems):
-            # Get the embedding function of the embedding model defined
-            embd = self.get_emb_function()
-        
             # Add problems to the database
             logger.info(f"Adding examples of {basename_file} in the database...")
             start_time = time.time()
             self.add_to_database(problems, collection, basename_file)
             end_time = time.time() - start_time
             del problems
-            del embd
+            gc.collect()
+            torch.cuda.empty_cache()
             return end_time
         else:
             logger.info("All the problems already saved in the database.")
@@ -77,7 +75,6 @@ class ChromaDatabase(VectorDatabase):
         questions_texts = [problem["question"] for problem in problems.values()]
         questions_ids = list(problems.keys())
         metadata = [{"id": key} for key in problems.keys()]
-        del questions_texts
         
         # Embed the questions
         embd = self.get_emb_function()
@@ -85,17 +82,19 @@ class ChromaDatabase(VectorDatabase):
         logger.info(f"Adding {len(questions_ids)} examples to the database...")
         logger.info(f"Number of examples in the database before: {collection.count()}")
         # upsert() will add documents if don't exits or update if they exits.
-        batch_size = 512
+        batch_size = 256
         for i in tqdm(range(0, len(questions_ids), batch_size), desc="Adding embeddings to ChromaDB..."):
             batch_questions_ids = questions_ids[i:i+batch_size]
             batch_metadata = metadata[i:i+batch_size]
-            batch_emb = embd.embed(batch_questions_ids)
+            questions_to_embed = questions_texts[i:i+batch_size]
+            batch_emb = embd.get_vectors(questions_to_embed)
             collection.upsert(embeddings=batch_emb, ids=batch_questions_ids, metadatas=batch_metadata)
             del batch_emb, batch_metadata, batch_questions_ids
 
-        torch.cuda.empty_cache()
-        gc.collect()
         del embd, metadata, questions_ids
+        gc.collect()
+        torch.cuda.empty_cache()
+
         logger.info(f"Number of examples in the database after: {collection.count()}")
 
 

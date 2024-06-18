@@ -87,7 +87,7 @@ def generate(model, subject, config):
                 generations_times["embd_val_problems"] = embd_val_time
             
             # No database provided. Generate validation examples using the LLM
-            out_val_path = os.path.join(GENERATIONS_PATH, model_name, "val", str(configuration["ensembles"]), f"{configuration['k']}k")
+            out_val_path = os.path.join(GENERATIONS_PATH, model_name, "val", dataset_path, str(configuration["ensembles"]), f"{configuration['k']}k")
 
             if overwrite or not os.path.exists(os.path.join(out_val_path, "generations.json")):
                 logger.info(f"GENERATING VALIDATION CoT EXAMPLES...\nDataset: {input_name}_val.json\nExamples will be saved here: {out_val_path}\n")
@@ -154,7 +154,8 @@ def generate(model, subject, config):
 
         # If SC-COT, no examples are needed
         examples = None
-        chromda_db_filename = None  
+        chromda_db_filename = None
+        datastore = None
         
 
     logger.info(f"Generating CoT of test examples...\nDataset: {input_name}_test.json\nExamples will be saved here: {out_test_path}\n")
