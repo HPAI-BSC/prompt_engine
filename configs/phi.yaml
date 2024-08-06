@@ -3,12 +3,12 @@ vllm:
   tokenizer_mode:
   trust_remote_code: true
   tensor_parallel_size:
-  dtype:
+  dtype: float16 # Colab TPU only supports float16
   quantization:
   revision:
   tokenizer_revision:
   seed: 42
-  gpu_memory_utilization: 0.9
+  gpu_memory_utilization: 0.75
   swap_space:
   enforce_eager:
   max_context_len_to_capture:

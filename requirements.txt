@@ -1,9 +1,9 @@
+vllm
 transformers
 accelerate
 python-liquid
 auto-gptq
 angle-emb
 sentence-transformers
-vllm
 chromadb
 qdrant-client
