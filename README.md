@@ -1,11 +1,35 @@
-# prompt_engine: Evaluate your model using advanced prompt strategies
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png">
+    <img alt="prompt_engine" src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" width=55%>
+  </picture>
+</p>
+<h2 align="center">
+prompt_engine: Evaluate your model using advanced prompt strategies
+</h2>
+
+<p align="center">
+| <a href="https://arxiv.org/abs/2409.15127"><b>Paper</b></a> | <a href="https://vllm.ai"><b>Aloe Alpha</b></a> | <a href="https://hpai.bsc.es/"><b>HPAI Website</b></a> |
+</p>
+
+*Latest News* 🔥
+- [2024/09] [**Boosting Healthcare LLMs Through Retrieved Context**](https://arxiv.org/abs/2409.15127) is now available in Arxiv!
+- [2024/05] [**Aloe: A Family of Fine-tuned Open Healthcare LLMs**](https://arxiv.org/abs/2405.01886) is now available in Arxiv!
+- [2024/04] [**Aloe-Alpha-8B**](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) is now available in Hugginface!
+
+
+
+## About
 
 This repository serves as a comprehensive platform for evaluating large language models (LLMs) utilizing diverse prompt engineering techniques aimed at enhancing performance on medical benchmarks. Our goal is to explore how prompt engineering impact LLMs' accuracy, reliability, and overall usefulness in addressing complex medical scenarios. This repo was first created to support the [Aloe](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) model.
 
 Central to our investigation were efforts to exploit the inherent reasoning capabilities of LLMs by employing sophisticated prompt engineering approaches towards medical applications. Among the techniques adopted include:
 - **Self-Consistency Chain-of-Thought (SC-CoT)**: An iterative process wherein the LLM generates plausible explanations supporting each proposed solution before settling on a final answer. By encouraging systematic thinking, SC-CoT helps enhance both the confidence and veracity of generated responses.
 
-- [**Medprompt**](https://github.com/microsoft/promptbase): A technique proposed by Microsoft, extending the traditional SC-COT. Medprompt introduces additional features specifically targeted at refining LLM behavior in medical settings. One key enhancement involves randomly shuffling provided choices before soliciting the LLM's response, thereby discouraging biases arising from predictable option orderings. Furthermore, integrating relevant case studies or "K nearest neighbor" (Knn) few-shot examples directly into prompts allows LLMs to learn from analogous situations and draw parallels between them, ultimately fostering better-rounded judgements.
+- [**Medprompt**](https://github.com/microsoft/promptbase): A technique proposed by Microsoft, extending the traditional SC-COT. Medprompt introduces additional features specifically targeted at refining LLM behavior in medical settings. One key enhancement involves randomly shuffling provided choices before soliciting the LLM's response, thereby discouraging biases arising from predictable option orderings. Furthermore, integrating relevant case studies or "K nearest neighbor" (Knn) few-shot examples directly into prompts allows LLMs to learn from analogous situations and draw parallels between them, ultimately fostering better-rounded judgments.
+- **OpenMedprompt**: We aim to go beyond traditional Multiple-Choice Question-Answer approaches by introducing a novel strategy that enhances the generation of more accurate and reliable open-ended responses. To achieve this, we propose two innovative methods focused on consensus-building and answer refinement:
+    - **OM-ER (OpenMedprompt with Ensemble Refining)**: Leverages the diversity of multiple generated answers to produce a refined and more accurate final response. It involves generating 𝑁 initial answers with randomized temperature and top_p parameters, incorporating 𝐾 relevant examples from the database into the prompt. Then, the LLM synthesizes these 𝑁 answers into a single, refined response.
+    - **OM-SR (OpenMedprompt with Self-reflection)**: This strategy employs a feedback loop to improve the generated answer. It begins by generating an initial answer using the 𝐾 most similar examples from the database. Then, it performs 𝑁 iterations of self-reflection, where the model generates feedback on its previous response and produces an improved answer based on this feedback. We integrate attribute scores from ArmoRM-Llama3-8B [28], a reward model along with the critique model’s reflection as an external feedback to guide answer generation.
 
 
 ## Implementation
@@ -22,20 +46,20 @@ Indeed, central to our approach was providing flexibility and adaptability in ex
 ## Usage guide
 
 ### Installation
-To install and execute this repo, a requirements file is provided with the necessary packages.
+A requirements file with the necessary packages is provided to install and execute this repo.
 
 ```
 pip install -r requirements.txt
 ```
 
-To execute test. First make sure you configured properly a YAML configuration file. Then, execute the following script:
+To execute the test. First, make sure you configured properly a YAML configuration file. Then, execute the following script:
 
 ```
 python prompt_engine/run.py configs/your_config.YAML
 ```
 
-### Configure a execution
-To configure a execution of Medprompt or Self-Consistency CoT ensembling, a configurtion file must be created. Some examples are included in the "/configs" folder. The configuration files defines the parameters of the execution, model configuration and sampling parameters. More details about the configuration parameters can be found [here](configs).
+### Configure an execution
+To configure an execution of Medprompt or Self-Consistency CoT ensembling, a configuration file must be created. Some examples are included in the "/configs" folder. The configuration files define the parameters of the execution, model configuration, and sampling parameters. More details about the configuration parameters can be found [here](configs).
 
 ### Datasets
 We include the following medical datasets formatted in the required format:
@@ -46,7 +70,7 @@ We include the following medical datasets formatted in the required format:
 - MMLU (medical subsets)
 - CareQA
 
-Other datasets can be used if they are in the required format. More details in [Datasets](medprompt/datasets) section.
+Other datasets can be used if they are in the required format. More details can be found in [Datasets](medprompt/datasets) section.
 
 
 ### Output
@@ -122,26 +146,51 @@ Each final directory will store the generations file of the exection, named "gen
 ```
 
 
-When the generations of a execution, the evaluation procedure starts, and generates the results storing 3 extra files:
+When the generations of an execution, the evaluation procedure starts, and generates the results storing 3 extra files:
 
 - evaluation_TIMESTAMP.json: Stores the evaluation results.
     - Number of examples evaluated and the **accuracy**
-    - Number of answers that the model has not been able of answering correctly (_no_pased_answers_)
+    - Number of answers that the model has not been able to answer correctly (_no_pased_answers_)
     - Number of draws in the majority voting (and how many resulted or not in a correct prediction) (_draws_)
     - Number of times the model predicted each option (ABCD...) (_options_)
     - Statistics regarding the number of generated tokens, time spend inferencing the model, lengths of the prompts... (_statistics_)
     - The parameters of the execution (_config_)
-    - Timestamp of the evalution execution (_date_) and the last modification timestamp of the generations.json file (_generation_date_)
-- times_TIMESTAMP.json: Saves information about the time spend in each stage of the proces.
-- incorrect_questions_TIMESTAMP: Stores the questions that resulted in a incorrect result after the majority voting.
+    - Timestamp of the evaluation execution (_date_) and the last modification timestamp of the generations.json file (_generation_date_)
+- times_TIMESTAMP.json: Saves information about the time spent in each stage of the process.
+- incorrect_questions_TIMESTAMP: Stores the questions that resulted in an incorrect result after the majority voting.
 
 ### Databases
-When running Medprompt, we allow the utilization of custom databases. When a databases is specified in the configuration, the generation of training/validation CoT examples will be skipped and the examples of the databases will be used instead. However, the database must have the same format as the output generations file, detailed above. Feel free to generate your custom databases to test the Medprompt technique.
+When running Medprompt, we allow the utilization of custom databases. When a database is specified in the configuration, the generation of training/validation CoT examples will be skipped and the examples of the databases will be used instead. However, the database must have the same format as the output generations file, detailed above. Feel free to generate your custom databases to test the Medprompt technique.
 
 ### Citations
-If you use this repository in a published work, please cite the following papers as source:
+If you use this repository in a published work, please cite the following papers as sources:
+
+Bayarri-Planas, J., Gururajan, A. K., and Garcia-Gasulla, D., 2024. Boosting Healthcare LLMs Through Retrieved Context. arXiv preprint arXiv:2409.15127.
+```
+@misc{bayarriplanas2024boostinghealthcarellmsretrieved,
+      title={Boosting Healthcare LLMs Through Retrieved Context}, 
+      author={Jordi Bayarri-Planas and Ashwin Kumar Gururajan and Dario Garcia-Gasulla},
+      year={2024},
+      eprint={2409.15127},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2409.15127}, 
+}
+```
 
 Gururajan, A.K., Lopez-Cuena, E., Bayarri-Planas, J., Tormos, A., Hinjos, D., Bernabeu-Perez, P., Arias-Duart, A., Martin-Torres, P.A., Urcelay-Ganzabal, L., Gonzalez-Mallo, M. and Alvarez-Napagao, S., 2024. Aloe: A Family of Fine-tuned Open Healthcare LLMs. arXiv preprint arXiv:2405.01886.
+```
+@misc{gururajan2024aloefamilyfinetunedopen,
+      title={Aloe: A Family of Fine-tuned Open Healthcare LLMs}, 
+      author={Ashwin Kumar Gururajan and Enrique Lopez-Cuena and Jordi Bayarri-Planas and Adrian Tormos and Daniel Hinjos and Pablo Bernabeu-Perez and Anna Arias-Duart and Pablo Agustin Martin-Torres and Lucia Urcelay-Ganzabal and Marta Gonzalez-Mallo and Sergio Alvarez-Napagao and Eduard Ayguadé-Parra and Ulises Cortés Dario Garcia-Gasulla},
+      year={2024},
+      eprint={2405.01886},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2405.01886}, 
+}
+```
+
 
 
 
