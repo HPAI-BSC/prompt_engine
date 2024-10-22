@@ -6,10 +6,10 @@ import gc
 from qdrant_client import QdrantClient, models
 
 from .database import VectorDatabase
-from ..utils.constants import DATABASES_PATH
-from ..utils.utils import load_json_file
-from ..utils.embedding_functions import *
-from ..utils.logger import init_logger
+from src.utils.constants import DATABASES_PATH
+from src.utils.utils import load_json_file
+from src.utils.embedding_functions import *
+from src.utils.logger import init_logger
 
 logger = init_logger(__name__)
 

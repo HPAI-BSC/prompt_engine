@@ -292,3 +292,31 @@ def rerank_examples(problems, examples, config):
             selected_examples[test_id]["examples"]["reranked"]["questions"].append(examples[test_id]["solutions"][i])
 
     return selected_examples
+
+
+
+def load_qa_file(path):
+    data = load_json_file(path)
+
+    output = {}
+    for key, value in data.items():
+        output[key] = {}
+        output[key]["id"] = value["id"]
+        output[key]["question"] = value["question"]
+        output[key]["correct_answer"] = value["options"][value["correct_answer"]]
+    return output
+
+def load_qa_database(path):
+    data = load_json_file(path)
+
+    output = {}
+    for key, value in data.items():
+        output[key] = {}
+        output[key]["id"] = value["id"]
+        output[key]["question"] = value["question"]
+        if "options" in value:
+            output[key]["correct_answer"] = value["options"][value["correct_answer"]]
+        else:
+            output[key]["correct_answer"] = value["correct_answer"]
+        output[key]["answer"] = value["generations"][-1]["response"]
+    return output
