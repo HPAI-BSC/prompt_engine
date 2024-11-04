@@ -9,11 +9,11 @@ prompt_engine: Evaluate your model using advanced prompt strategies
 </h2>
 
 <p align="center">
-| <a href="https://arxiv.org/abs/2409.15127"><b>Paper</b></a> | <a href="https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha](https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363"><b>Aloe Family Models</b></a> | <a href="https://hpai.bsc.es/"><b>HPAI Website</b></a> |
+| <a href="https://arxiv.org/abs/2409.15127"><b>Paper</b></a> | <a href="https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363"><b>Aloe Family Models</b></a> | <a href="https://hpai.bsc.es/"><b>HPAI Website</b></a> |
 </p>
 
 *Latest News* 🔥
-- [2024/09] [**Aloe-Beta**]([https://arxiv.org/abs/2409.15127](https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363)) is out! New medical SOTA models available in Hugginface!
+- [2024/09] [**Aloe-Beta**](https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363) is out! New medical SOTA models available in Hugginface!
 - [2024/09] [**Boosting Healthcare LLMs Through Retrieved Context**](https://arxiv.org/abs/2409.15127) is now available in Arxiv!
 - [2024/05] [**Aloe: A Family of Fine-tuned Open Healthcare LLMs**](https://arxiv.org/abs/2405.01886) is now available in Arxiv!
 - [2024/04] [**Aloe-Alpha-8B**](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) is now available in Hugginface!
