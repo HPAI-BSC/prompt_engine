@@ -9,7 +9,7 @@ prompt_engine: Evaluate your model using advanced prompt strategies
 </h2>
 
 <p align="center">
-| <a href="https://arxiv.org/abs/2409.15127"><b>Paper</b></a> | <a href="[https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha](https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363)"><b>Aloe Family Models</b></a> | <a href="https://hpai.bsc.es/"><b>HPAI Website</b></a> |
+| <a href="https://arxiv.org/abs/2409.15127"><b>Paper</b></a> | <a href="https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha](https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363"><b>Aloe Family Models</b></a> | <a href="https://hpai.bsc.es/"><b>HPAI Website</b></a> |
 </p>
 
 *Latest News* 🔥
