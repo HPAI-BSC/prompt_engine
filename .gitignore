@@ -1,7 +1,6 @@
 __pycache__/
 
 prompt_engine/outputs/*
-prompt_engine/databases/medprompt*
 prompt_engine/databases/qdrant
 prompt_engine/databases/qdrant/*
 prompt_engine/databases/chromadb
