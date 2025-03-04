@@ -53,7 +53,7 @@ def load_json_file(file_path):
             data: dictionary with the JSON file data    
     """
 
-    logger.info(f"Loading{file_path}")
+    logger.info(f"Loading {file_path}")
     if os.path.exists(file_path):
         if file_path.endswith(".gz"):
             with gzip.open(file_path, "rt") as f:
@@ -303,7 +303,7 @@ def load_qa_file(path):
         output[key] = {}
         output[key]["id"] = value["id"]
         output[key]["question"] = value["question"]
-        output[key]["correct_answer"] = value["options"][value["correct_answer"]]
+        output[key]["correct_answer"] = value["options"][value["correct_answer"]] if "options" in value else value["correct_answer"]
     return output
 
 def load_qa_database(path):
