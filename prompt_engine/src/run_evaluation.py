@@ -11,7 +11,7 @@ def launch_evaluations(subjects, config, module):
 
 
 if __name__ == "__main__":
-    subjs, configuration = prepare()
+    subjs, configuration, _ = prepare()
 
     ex_type = configuration["config"]["type"]
     

@@ -1,21 +1,20 @@
 import os
+import random
 import traceback
 import concurrent
-from dataclasses import asdict
-from vllm import SamplingParams
 import time
 import copy
 
 from src.utils.utils import *
 from src.utils.constants import EXAMPLES_CONVERSION
-from src.utils.prompt_templates import datasets_prompts
+from src.utils.prompt_templates import datasets_prompts, think_prompt
 
 from src.utils.logger import init_logger
 
 logger = init_logger(__name__)
 
 
-def infer(model, prompts, problems, sampling_params, n_retries, log_file):
+def infer(model, prompts, problems, sampling_params, batch_size, n_retries, log_file):
     """
         Infer the responses for the prompts using the VLLM model
 
@@ -33,27 +32,13 @@ def infer(model, prompts, problems, sampling_params, n_retries, log_file):
     for retry in range(n_retries):
         calls += 1
         params = copy.deepcopy(sampling_params)
-        if "max_tokens" not in params:
-            params["max_tokens"] = 500
-        params["max_tokens"] += (100 * retry)
         
-        if "temperature" not in params:
-            params["temperature"] = 0.01
-        params["temperature"] += (0.05 * retry)
-        if params["temperature"] > 1:
-            params["temperature"] = 1
-
-        params = SamplingParams(**params)
-
         prompts_text = [p for _, _, p, _ in prompts] # Get only the text of the prompts
-        outputs = model.generate(prompts_text, params)
+        outputs, tokens, metrics = model.generate(prompts_text, params, batch_size=batch_size, retry=retry)
         messages = []
-        for i, output in enumerate(outputs):
-            metrics = asdict(output.metrics)
+        for i, generated_text in enumerate(outputs):
             problem = problems[prompts[i][0]]
             order = prompts[i][1]
-
-            generated_text = output.outputs[0].text.strip()
             result, original_answer = parse_response(problem, generated_text, order)
 
             message = f"########## Prompt ########## (id={prompts[i][0]} retry={retry+1})\n{prompts_text[i]}\n"
@@ -66,9 +51,8 @@ def infer(model, prompts, problems, sampling_params, n_retries, log_file):
                     "result": result,
                     "order": order,
                     "retries": calls,
-                    "prompt_tokens": len(output.prompt_token_ids),
-                    "generated_tokens": len(output.outputs[0].token_ids),
-                    "metrics": metrics
+                    "tokens": tokens[i],
+                    "metrics": metrics[i]
                 }
                 if "generations" not in problem:
                     problem["generations"] = []
@@ -133,7 +117,7 @@ def generate_problem_prompts(model, problem_id, problem, selected_examples, syst
     return prompts
 
 
-def generate_prompts(datastore, model, problems, solutions, problems_filename, database_filename, knn, configuration):
+def generate_prompts(datastore, model, problems, solutions, problems_filename, database_filename, configuration):
     """
         Generate the prompts for the problems in the dataset
 
@@ -154,10 +138,11 @@ def generate_prompts(datastore, model, problems, solutions, problems_filename, d
     select_time = None
     rerank_time = None
 
-    if knn:
+    if datastore:
+        # If datastore, search the most similar examples into the generated database examples
         start_select_time = time.time()
         logger.info("Selecting KNN examples for the prompts")
-        selected_examples = datastore.select_examples(problems, solutions, problems_filename, database_filename)   # If knn, search the most similar examples into the generated database examples
+        selected_examples = datastore.select_examples(problems, solutions, problems_filename, database_filename)
         for key, output in selected_examples.items():
             selected_examples[key] = {
                 "solutions": [solutions[i] for i in output["ids"] if i in solutions],
@@ -173,16 +158,20 @@ def generate_prompts(datastore, model, problems, solutions, problems_filename, d
             rerank_time = time.time() - start_rerank_time
 
     else:
-        # If not knn, select the first K static examples
-        selected_examples = {}
-        for p_id in problems.keys():
-            selected_examples[p_id] = {
-                "solutions": solutions.copy()[:configuration["k"]]
-                }
+        # If not datastore, use K static examples (they can be from the database or the default examples)
+        logger.info(f"No datastore. Using {configuration['k']} static examples. {configuration['embedding']} strategy.")
+        if "embedding" in configuration and configuration["embedding"] == "random":
+            static_examples = random.sample(list(solutions.values()), configuration["k"])
+        else:
+            static_examples = solutions[:configuration["k"]] if isinstance(solutions, list) else list(solutions.values())[:configuration["k"]]
+        selected_examples = {p_id: {"solutions": static_examples} for p_id in problems.keys()}
     
     # With the selected examples for each problem, generate the prompts
     logger.info("Examples prepared. Generating individual prompts for each ensemble.")
-    system_prompt = datasets_prompts[EXAMPLES_CONVERSION[configuration["dataset"]]]["system_prompt"]
+    if "deepseek" in database_filename.lower():
+        system_prompt = think_prompt
+    else:
+        system_prompt = datasets_prompts[EXAMPLES_CONVERSION[configuration["dataset"]]]["system_prompt"]
     prompts = []
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Submit tasks for each problem
@@ -249,12 +238,8 @@ def execute(datastore, model, dataset_path, output_path, examples, database_file
     # Load examples
     if examples is None:
         # If examples is None, use the default few-shot examples defined in prompt_templates.py
-        knn = False 
         solutions = datasets_prompts[EXAMPLES_CONVERSION[configuration["dataset"]]]["examples"]
     else:
-        # If examples is not None, means that we have to use examples from the database as few-shots
-        knn = True
-
         # Load the solutions of the database examples
         start_load_examples = time.time()
         solutions = load_solutions(examples)
@@ -270,7 +255,6 @@ def execute(datastore, model, dataset_path, output_path, examples, database_file
                                                 solutions=solutions,
                                                 problems_filename=os.path.basename(dataset_path),
                                                 database_filename=database_filename,
-                                                knn=knn,
                                                 configuration=configuration)
 
         times["generate_prompts"] = {"total": time.time() - start_generate_prompts}
@@ -284,8 +268,9 @@ def execute(datastore, model, dataset_path, output_path, examples, database_file
             n_retries = 10
             
         # Infer the prompts using VLLM
+        batch_size = configuration["batch_size"] if "batch_size" in configuration else 100
         start_infer = time.time()
-        infer(model, prompts=prompts, problems=problems, sampling_params=sampling_params, n_retries=n_retries, log_file=log_file)
+        infer(model, prompts=prompts, problems=problems, sampling_params=sampling_params, batch_size=batch_size, n_retries=n_retries, log_file=log_file)
         times["llm_infer"] = time.time() - start_infer
 
         # Save the results into a JSON file

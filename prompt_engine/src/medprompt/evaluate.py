@@ -30,7 +30,8 @@ def evaluate(file_path, config):
     except:
         m_time = None
 
-    config["config"] = filter_non_empty(config["config"])   # Some config parameters could be modified by generate() to null
+    if config and "config" in config:
+        config["config"] = filter_non_empty(config["config"])   # Some config parameters could be modified by generate() to null
 
     # Initialize the evaluation variables
     y_true = []
@@ -40,6 +41,7 @@ def evaluate(file_path, config):
 
     # Prompt lenght statistics
     total_generated_tokens = 0
+    total_input_tokens = 0
     total_inference_time = 0
     mean_prompt = []
     max_prompt = []
@@ -72,12 +74,14 @@ def evaluate(file_path, config):
                         options[response["original_answer"]] += 1
                     else:
                         options[response["original_answer"]] = 1
-                total_generated_tokens += response["generated_tokens"]
-                inference_time = response["metrics"]["finished_time"] - response["metrics"]["first_scheduled_time"]
-                total_inference_time += inference_time
-                prompt_length.append(response["prompt_tokens"])
-                generated_length.append(response["generated_tokens"])
-                total_length.append(int(response["prompt_tokens"]) + int(response["generated_tokens"]))
+                total_generated_tokens += response["tokens"]["generated"]
+                total_input_tokens += response["tokens"]["prompt"]
+                if "metrics" in response and response["metrics"] is not None:
+                    inference_time = response["metrics"]["finished_time"] - response["metrics"]["first_scheduled_time"]
+                    total_inference_time += inference_time
+                prompt_length.append(response["tokens"]["prompt"])
+                generated_length.append(response["tokens"]["generated"])
+                total_length.append(int(response["tokens"]["prompt"]) + int(response["tokens"]["generated"]))
 
             if len(prompt_length) > 0:
                 mean_prompt.append(sum(prompt_length) / len(prompt_length))
@@ -131,6 +135,7 @@ def evaluate(file_path, config):
         "mean_cosine_similarity": np.mean(scores) if len(scores) > 0 else 0,
         "statistics": {
             "total_generated_tokens": total_generated_tokens,
+            "total_input_tokens": total_input_tokens,
             "total_inference_time": total_inference_time,
             "tokens/s": total_generated_tokens / total_inference_time if total_inference_time > 0 else 0,
             "max_prompt_length": max(max_prompt),
@@ -180,7 +185,7 @@ def evaluate_from_config(subject, config):
     """
     
     # Build the path to the generations file
-    model_name = os.path.basename(config["vllm"]["model"])
+    model_name = os.path.basename(config["vllm"]["model"]) if "vllm" in config else os.path.basename(config["openai"]["model"])
     ex_type = config["config"]["type"]
     dataset_path = config["config"]["dataset"]
     if subject is not None:
@@ -198,7 +203,9 @@ def evaluate_from_config(subject, config):
         reranker_name = os.path.basename(config["config"]["reranker"]["path"])
         k_out += f"_{reranker_name}"
 
-    generations_path = os.path.join(GENERATIONS_PATH, 
+    working_dir = config["config"]["working_dir"] if "working_dir" in config["config"] else GENERATIONS_PATH
+    generations_path = os.path.join(working_dir, 
+                                    "outputs",
                                     model_name, 
                                     embedding, 
                                     dataset_path,

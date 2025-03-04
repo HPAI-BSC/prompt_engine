@@ -33,12 +33,15 @@ def generate(model, subject, config):
 
     # Load main parameters, configuration and sampling_params
     configuration = config["config"]
+    working_dir = configuration["working_dir"] if "working_dir" in configuration else None
+    logger.info(f"Working directory: {working_dir}")
+
     if "sampling_params" in config:
         sampling_params = config["sampling_params"]
     else:
         sampling_params = None
     
-    model_name = os.path.basename(config["vllm"]["model"])
+    model_name = model.model_name
 
     # Name and path of the input dataset
     input_name = f"{configuration['dataset']}_{subject}" if subject is not None and subject != "" else configuration["dataset"]
@@ -49,45 +52,42 @@ def generate(model, subject, config):
     if subject is not None:
         dataset_path = os.path.join(dataset_path, subject)
 
+    # Set default parameters for medprompt
+    if "ensembles" not in configuration:
+        configuration["ensembles"] = 5
+    if "k" not in configuration:
+        configuration["k"] = 5
+    if "shuffle" not in configuration:
+        configuration["shuffle"] = True
+    if "database" not in configuration:
+        configuration["database"] = None
+    if "reranker" not in configuration:
+        configuration["reranker"] = None
+    overwrite = configuration["overwrite"] if "overwrite" in configuration else True
 
-    if configuration["type"] == "medprompt":
+    if "embedding" in configuration:
         # Medprompt execution
-
-        # Set default parameters for medprompt
-        if "ensembles" not in configuration:
-            configuration["ensembles"] = 5
-        if "k" not in configuration:
-            configuration["k"] = 5
-        if "shuffle" not in configuration:
-            configuration["shuffle"] = True
-        if "database" not in configuration:
-            configuration["database"] = None
-        if "reranker" not in configuration:
-            configuration["reranker"] = None
-        if "overwrite" in configuration:
-            overwrite = configuration["overwrite"]
-        else:
-            overwrite = True
-
         embedding_name = os.path.basename(configuration["embedding"])
-
-        logger.info(f"Loading client database: {embedding_name}...")
-        if "vector_database" in configuration and configuration["vector_database"] == "qdrant":
-            datastore = QdrantDatabase(config)
+        if embedding_name in ["random", "static"]:
+            datastore = None
         else:
-            datastore = ChromaDatabase(config)  # If not specified, use ChromaDB as default
-        logger.info("Database loaded")
+            logger.info(f"Loading client database: {embedding_name}...")
+            if "vector_database" in configuration and configuration["vector_database"] == "qdrant":
+                datastore = QdrantDatabase(config)
+            else:
+                datastore = ChromaDatabase(config)  # If not specified, use ChromaDB as default
+            logger.info("Database loaded")
     
         # Check if database should be used
         if configuration["database"] is None:
             # Save the embeddings of the validation problems in the ChromaDB database
             logger.info("Embedding validation problems...")
-            embd_val_time = datastore.embed_problems(input_path + "_val.json")
+            embd_val_time = datastore.embed_problems(input_path + "_val.json") if datastore else None
             if embd_val_time:
                 generations_times["embd_val_problems"] = embd_val_time
             
             # No database provided. Generate validation examples using the LLM
-            out_val_path = os.path.join(GENERATIONS_PATH, model_name, "val", dataset_path, str(configuration["ensembles"]), f"{configuration['k']}k")
+            out_val_path = os.path.join(working_dir, "outputs", model_name, "val", dataset_path, str(configuration["ensembles"]), f"{configuration['k']}k")
 
             if overwrite or not os.path.exists(os.path.join(out_val_path, "generations.json")):
                 logger.info(f"GENERATING VALIDATION CoT EXAMPLES...\nDataset: {input_name}_val.json\nExamples will be saved here: {out_val_path}\n")
@@ -103,15 +103,14 @@ def generate(model, subject, config):
             examples = out_val_path # Set the output of the validation examples, as input test examples
             chromda_db_filename = os.path.basename(input_path) + "_val.json"
         else:
-            # If database path provided, use the file to construct the database of examples
-            if configuration["database"].endswith(".json"):
-                examples = os.path.join(DATABASES_PATH, configuration["database"])    # Set the database examples as input test examples
-            else:
-                examples = os.path.join(DATABASES_PATH, configuration["database"] + ".json")    # Set the database examples as input test examples
+            examples = os.path.join(working_dir, "databases", configuration["database"])
+            if not examples.endswith(".json"):
+                examples += ".json"
+                
             chromda_db_filename = os.path.basename(examples)
 
             # Save the embeddings of the database problems in the ChromaDB database
-            embd_database_time = datastore.embed_problems(examples)
+            embd_database_time = datastore.embed_problems(examples) if datastore else None
             if embd_database_time:
                 generations_times["embd_DB_problems"] = embd_database_time
             logger.info(f"USING DATABASE AS EXAMPLES: {examples}\n")
@@ -125,32 +124,23 @@ def generate(model, subject, config):
             k_out += f"_{reranker_name}"
         
         # Set the output path of the Medprompt generations
-        out_test_path = os.path.join(GENERATIONS_PATH, model_name, embedding_name, dataset_path, str(configuration["ensembles"]), k_out)
+        out_test_path = os.path.join(working_dir, "outputs", model_name, embedding_name, dataset_path, str(configuration["ensembles"]), k_out)
 
         # Save the embeddings of the test problems in the database
         logger.info(f"Embedding test problems: {input_path}_test.json")
-        embd_test_time = datastore.embed_problems(input_path + "_test.json")
+        embd_test_time = datastore.embed_problems(input_path + "_test.json") if datastore else None
         if embd_test_time:
             generations_times["embd_test_problems"] = embd_test_time
 
     else:
         # SC-COT execution
-
-        # Set default parameters for SC-COT
-        if "ensembles" not in configuration:
-            configuration["ensembles"] = 5
-        if "k" not in configuration:
-            config["config"]["k"] = 3
-        if "shuffle" not in configuration:
-            configuration["shuffle"] = False
-            
         # If SC-COT, database, embedding and reranker are not needed
-        configuration["database"] = None
         configuration["embedding"] = None
+        configuration["database"] = None
         configuration["reranker"] = None
 
         # Set the output path of the SC-COT generations
-        out_test_path = os.path.join(GENERATIONS_PATH, model_name, "SC-COT", dataset_path, str(configuration["ensembles"]), f"{configuration['k']}k")
+        out_test_path = os.path.join(working_dir, "outputs", model_name, "SC-COT", dataset_path, str(configuration["ensembles"]), f"{configuration['k']}k")
 
         # If SC-COT, no examples are needed
         examples = None

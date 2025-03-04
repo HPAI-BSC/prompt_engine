@@ -1,11 +1,9 @@
 import argparse
 import os
-import torch
-import gc
 import importlib
-from vllm.distributed.parallel_state import destroy_model_parallel, destroy_distributed_environment
 
 from src.utils.model import Model
+from src.utils.openai_model import OpenAIModel
 from src.utils.constants import *
 from src.utils.utils import load_config, filter_non_empty
 
@@ -21,21 +19,18 @@ def parse_arguments():
     p.add_argument(
         "configuration", type=str, help="Path of the YAML configuration file"
     )
+    p.add_argument("--ip-server", type=str, default="localhost", help="IP address of an already started vLLM server")
+    p.add_argument("--port", type=str, default="6378", help="Port of the vLLM server")
     return p.parse_args()
 
 
 # Check the format of the configuration file
 def check_configuration(config):
-    assert config["vllm"]['model'] is not None, "Model path must be specified"
     assert "dataset" in config["config"], "ERROR: Dataset not specified in configuration."
     assert config["config"]["dataset"] in VALID_DATASETS, "ERROR: Not a valid dataset: " + config["config"]["dataset"]
-    assert "type" in config["config"], "ERROR: 'type' not specified in configuration. )"
-    assert config["config"]["type"] in ["medprompt", "sc-cot", "qa"], "Not a valid execution type: " + config["config"]["type"]["name"] + ". Select one of the valid types (type: 'medprompt', 'sc-cot')."
     
-    if config["config"]["type"] == "medprompt":
-        assert "embedding" in config["config"]
-        if "reranker" in config["config"]:
-            assert os.path.basename(config["config"]["reranker"]["path"]) in VALID_RERANKERS
+    if "reranker" in config["config"]:
+        assert os.path.basename(config["config"]["reranker"]["path"]) in VALID_RERANKERS
 
 
 def format_dataset_subjects(conf):
@@ -63,28 +58,35 @@ def prepare():
 
     # Load configuration
     config = load_config(args.configuration)
-    assert "vllm" in config, "ERROR: 'vllm' parameters not included in configuration."
+    assert "vllm" or "openai" in config, "ERROR: 'vllm' or 'openai' parameters not included in configuration. Cannot run without a model."
     assert "config" in config, "ERROR: 'config' parameters not included in configuration."
-    config["vllm"] = filter_non_empty(config["vllm"])
+    if "vllm" in config:
+        config["vllm"] = filter_non_empty(config["vllm"])
+    if "openai" in config:
+        config["openai"] = filter_non_empty(config["openai"])
     config["config"] = filter_non_empty(config["config"])
     config["sampling_params"] = filter_non_empty(config["sampling_params"])
-    if "evaluator" in config:
-        config["evaluator"] = filter_non_empty(config["evaluator"])
     check_configuration(config)
 
     subjects = format_dataset_subjects(config["config"])    # If mmlu, get all subjects to execute
+    ip_server = f"{args.ip_server}:{args.port}"
+    return subjects, config, ip_server
 
-    return subjects, config
-
-def run(subjects, config):
+def run(subjects, config, ip="localhost:6378"):
     # Load the model using VLLM and config parameters
-    
-    logger.info("\nStarting " + config["config"]["type"].upper() + " with the following configuration:")
+    model = None
+    logger.info("\nStarting execution with the following configuration:")
     logger.info(config)
     for subject in subjects:
-        model = Model(config["vllm"])
+        if model is None:
+            if "vllm" in config:
+                model = Model(config["vllm"])
+            elif "openai" in config:
+                model = OpenAIModel(config["openai"], ip)
+            else:
+                raise ValueError("Model not specified in configuration. Please specify 'vllm' or 'openai' model parameters.")
 
-        ex_type = config["config"]["type"]
+        ex_type = EXAMPLES_CONVERSION[config["config"]["dataset"]]
         
         if ex_type == "qa":
             module_generate = importlib.import_module("src.qa.generate")
@@ -96,19 +98,13 @@ def run(subjects, config):
         output_path = module_generate.generate(model=model, subject=subject, config=config)
         
         if ex_type == "qa":
-            print("Cleaning memory...")
-            destroy_model_parallel()
-            destroy_distributed_environment()
-            del model.model.llm_engine.model_executor
-        
-        del model # Isn't necessary for releasing memory, but why not
-        gc.collect()
-        torch.cuda.empty_cache()
+            model.destroy() # Destroy the model to release memory
+            del model
+            model = None
 
         module_evaluate.evaluate_from_path(output_path, config)
 
 
-
 if __name__ == "__main__":
-    subjs, configuration = prepare()
-    run(subjs, configuration)
+    subjs, configuration, ip_server = prepare()
+    run(subjs, configuration, ip_server)
