@@ -17,7 +17,8 @@ logger = init_logger(__name__)
 class ChromaDatabase(VectorDatabase):
     def __init__(self, config):
         super().__init__(config)
-        self.client = PersistentClient(path=os.path.join(DATABASES_PATH, "chromadb", self.embedding_name))
+        save_dir = config["config"]["working_dir"] if "working_dir" in config["config"] else DATABASES_PATH
+        self.client = PersistentClient(path=os.path.join(save_dir, "vector_databases", "chromadb", self.embedding_name))
 
 
 

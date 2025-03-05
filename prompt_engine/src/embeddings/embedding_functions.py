@@ -23,7 +23,7 @@ class BaseEmbedding:
     def embed(self, text):
         raise NotImplementedError
 
-    def get_vectors(self, input, batch_size=64):
+    def get_vectors(self, input, batch_size=32):
         """
             Encode the input texts using batches
 
@@ -78,11 +78,15 @@ class SentenceTransformersEmbedding(BaseEmbedding):
     """
     def __init__(self, embedding_path, *args, **kwargs):
         super().__init__(embedding_path, *args, **kwargs)
+        model_kwargs = {
+            "torch_dtype": "auto",
+        }
         n_gpus = torch.cuda.device_count()
+        
         if n_gpus > 1:
-            self.model = SentenceTransformer(embedding_path, device="cuda:"+str(n_gpus-1))
+            self.model = SentenceTransformer(embedding_path, trust_remote_code=True, device="cuda:"+str(n_gpus-1), model_kwargs=model_kwargs)
         else:
-            self.model = SentenceTransformer(embedding_path)
+            self.model = SentenceTransformer(embedding_path, trust_remote_code=True, model_kwargs=model_kwargs)
             
         self.emb_size = self.model.get_sentence_embedding_dimension()
         self.params = {

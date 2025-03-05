@@ -18,7 +18,8 @@ class QdrantDatabase(VectorDatabase):
 
     def __init__(self, config):
         super().__init__(config)
-        self.client = QdrantClient(path=os.path.join(DATABASES_PATH, "qdrant", self.embedding_name))
+        save_dir = config["config"]["working_dir"] if "working_dir" in config["config"] else DATABASES_PATH
+        self.client = QdrantClient(path=os.path.join(save_dir, "vector_databases", "qdrant", self.embedding_name))
 
 
     def embed_problems(self, file):  
