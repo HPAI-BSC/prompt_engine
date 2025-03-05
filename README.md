@@ -13,8 +13,11 @@ prompt_engine: Evaluate your model using advanced prompt strategies
 </p>
 
 *Latest News* 🔥
+- [2025/03] [**Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval**] pre-print is now available in Arxiv! Main contributions:
+  - Practical guide for cost-effective optimized context retrieval.
+  - Improved the Pareto Frontier on MedQA with **open-source** models: DeepSeek-R1 and Aloe-Beta-70B.
+  - We introduce **OpenMedQA**. a novel benchmark derived from MedQA, to rigorously evaluate open-ended medical question answering.
 - [2024/09] [**Aloe-Beta**](https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363) is out! New medical SOTA models available in Hugginface!
-- [2024/09] [**Boosting Healthcare LLMs Through Retrieved Context**](https://arxiv.org/abs/2409.15127) is now available in Arxiv!
 - [2024/05] [**Aloe: A Family of Fine-tuned Open Healthcare LLMs**](https://arxiv.org/abs/2405.01886) is now available in Arxiv!
 - [2024/04] [**Aloe-Alpha-8B**](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) is now available in Hugginface!
 
@@ -70,6 +73,7 @@ We include the following medical datasets formatted in the required format:
 - PubMedQA
 - MMLU (medical subsets)
 - CareQA
+- OpenMedQA
 
 Other datasets can be used if they are in the required format. More details can be found in [Datasets](medprompt/datasets) section.
 
@@ -168,10 +172,10 @@ If you use this repository in a published work, please cite the following papers
 
 Bayarri-Planas, J., Gururajan, A. K., and Garcia-Gasulla, D., 2024. Boosting Healthcare LLMs Through Retrieved Context. arXiv preprint arXiv:2409.15127.
 ```
-@misc{bayarriplanas2024boostinghealthcarellmsretrieved,
-      title={Boosting Healthcare LLMs Through Retrieved Context}, 
+@misc{bayarriplanas2025costeffectivehighperformanceopensourcellms,
+      title={Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval}, 
       author={Jordi Bayarri-Planas and Ashwin Kumar Gururajan and Dario Garcia-Gasulla},
-      year={2024},
+      year={2025},
       eprint={2409.15127},
       archivePrefix={arXiv},
       primaryClass={cs.AI},
