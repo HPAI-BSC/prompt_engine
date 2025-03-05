@@ -25,15 +25,18 @@ prompt_engine: Evaluate your model using advanced prompt strategies
 
 ## About
 
-This repository serves as a comprehensive platform for evaluating large language models (LLMs) utilizing diverse prompt engineering techniques aimed at enhancing performance on medical benchmarks. Our goal is to explore how prompt engineering impact LLMs' accuracy, reliability, and overall usefulness in addressing complex medical scenarios. This repo was first created to support the [Aloe](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) model.
+This repository provides a comprehensive framework for evaluating large language models (LLMs) using various prompt engineering techniques to improve performance on medical benchmarks. Our main goal is to explore how prompt engineering affects the accuracy, reliability, and overall usefulness of LLMs in addressing complex medical scenarios. This repository was initially created to support the [Aloe](https://huggingface.co/HPAI-BSC/Llama3-Aloe-8B-Alpha) model.
 
-Central to our investigation were efforts to exploit the inherent reasoning capabilities of LLMs by employing sophisticated prompt engineering approaches towards medical applications. Among the techniques adopted include:
-- **Self-Consistency Chain-of-Thought (SC-CoT)**: An iterative process wherein the LLM generates plausible explanations supporting each proposed solution before settling on a final answer. By encouraging systematic thinking, SC-CoT helps enhance both the confidence and veracity of generated responses.
+Our research focuses on leveraging the reasoning capabilities of LLMs through advanced prompt engineering techniques for medical applications. Specifically, this repository enables the evaluation of models on multiple-choice question-answering (MCQA) benchmarks using:
 
-- [**Medprompt**](https://github.com/microsoft/promptbase): A technique proposed by Microsoft, extending the traditional SC-COT. Medprompt introduces additional features specifically targeted at refining LLM behavior in medical settings. One key enhancement involves randomly shuffling provided choices before soliciting the LLM's response, thereby discouraging biases arising from predictable option orderings. Furthermore, integrating relevant case studies or "K nearest neighbor" (Knn) few-shot examples directly into prompts allows LLMs to learn from analogous situations and draw parallels between them, ultimately fostering better-rounded judgments.
-- **OpenMedprompt**: We aim to go beyond traditional Multiple-Choice Question-Answer approaches by introducing a novel strategy that enhances the generation of more accurate and reliable open-ended responses. To achieve this, we propose two innovative methods focused on consensus-building and answer refinement:
-    - **OM-ER (OpenMedprompt with Ensemble Refining)**: Leverages the diversity of multiple generated answers to produce a refined and more accurate final response. It involves generating 𝑁 initial answers with randomized temperature and top_p parameters, incorporating 𝐾 relevant examples from the database into the prompt. Then, the LLM synthesizes these 𝑁 answers into a single, refined response.
-    - **OM-SR (OpenMedprompt with Self-reflection)**: This strategy employs a feedback loop to improve the generated answer. It begins by generating an initial answer using the 𝐾 most similar examples from the database. Then, it performs 𝑁 iterations of self-reflection, where the model generates feedback on its previous response and produces an improved answer based on this feedback. We integrate attribute scores from ArmoRM-Llama3-8B, a reward model along with the critique model’s reflection as an external feedback to guide answer generation.
+- **Self-Consistency Chain-of-Thought (SC-CoT)**
+- **Medprompt**: A technique proposed by Microsoft, adapted for open-source models. Our version maintains all original functionalities while adding extra customizations:
+  - Support for custom embedding models
+  - Compatibility with pre-created custom databases
+  - Option to include a reranker model
+
+
+Additionally, the repository supports Open-Ended QA datasets, allowing answer generation and evaluation using an automated LLM-as-a-judge approach. We have also included the novel **OpenMedQA** dataset.
 
 
 ## Implementation
