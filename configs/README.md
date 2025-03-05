@@ -18,8 +18,6 @@ The configuration file must be a YAML with the following entries:
             Name of the dataset to test. See available datasets in medprompt/datasets.
         - subject (str)
             If dataset have different subjects, like MMLU, it allows to select which subject to test. If "all", all the subjected are executed. To launch multiple subjects, split them using commas: "anatomy,virology".
-        - final_answer (str ["merge", "reflection"])
-            UNDER DEVELOPMENT AND TESTING. If OpenMedQA is selected, one of this two options can be selected.
         - overwrite (boolean. Default True)
             This parameter is ignored if "sc-cot" type selected. If selected, generates validation examples even if they already exist.
         - shuffle: (boolean)
@@ -46,7 +44,8 @@ The configuration file must be a YAML with the following entries:
                 Optional. Defaults to 3. Indicates the number of KNN selected examples before reranking. The number of selected examples will be (n_rank * K)
     
     -evaluators: (Optional)
-        If OpenMedQA is selected, it defines the LLMs used as judges. It allows the inclusion of multiple evaluators. Each entry must have the following format:
+        If OpenMedQA is selected, it defines the LLMs used as judges. It allows the inclusion of multiple evaluators. 
+        An example can be seen in 'aloe_openmedqa.yaml'. Each entry must have the following format:
 
         - model (str. Mandatory)
             Path of the model to use. It can be either a local or Hugging Face path.
