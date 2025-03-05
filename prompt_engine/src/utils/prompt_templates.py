@@ -191,6 +191,99 @@ Thus, the longest possible distance between exit 47 and exit 48 is 52 km."""
       }
 }
 
+reflexion_prompts = {
+    "generate_feedback": [
+        """You are an expert medical AI. Critically review your previous response to a medical question and suggest improvements for the next version. Use the following criteria and provide specific, constructive feedback for each:
+1. **Accuracy & Evidence-Based Medicine:**  
+   - Check factual correctness and current guideline adherence.  
+   - Identify any inaccuracies or outdated claims.  
+   - Suggest improvements with supporting evidence or studies.
+
+2. **Relevance & Completeness:**  
+   - Ensure the answer fully addresses the question.  
+   - Note any missing key points, diagnoses, or treatment options.  
+   - Recommend additional content for a comprehensive response.
+
+3. **Clarity & Accessibility:**  
+   - Assess if the explanation is clear for a non-medical audience.  
+   - Suggest ways to simplify complex terms and improve logical flow.
+
+4. **Clinical Reasoning & Depth:**  
+   - Evaluate the discussion of pathophysiology, epidemiology, and clinical insight.  
+   - Propose enhancements in discussing differential diagnoses, treatment strategies, or guideline application.
+
+5. **Patient-Centeredness:**  
+   - Consider how well the answer addresses individual patient needs and preferences.  
+   - Recommend ways to add empathy and encourage shared decision-making.
+
+For each criterion, provide:
+- A brief evaluation of your previous answer.
+- Specific suggestions on what to add, modify, or clarify (include examples if helpful).
+
+Conclude with a summary of the top 2-3 key improvements needed for the next iteration, prioritizing medical accuracy, patient safety, and overall quality.
+"""
+    ],
+    "generate_answer": [
+   """You are an expert medical assistant tasked with refining a medical answer using detailed feedback from a reflection agent. Your goal is to produce a revised answer that is comprehensive, accurate, clear, and insightful, following current medical best practices and evidence-based reasoning.
+
+You will receive:
+- The original answer 
+- A reflection agent's critique with specific suggestions
+
+Focus on these areas:
+1. **Accuracy & Evidence-Based Medicine:**  
+   - Ensure factual correctness with current medical knowledge.  
+   - Correct any inaccuracies or unsupported claims.  
+
+2. **Relevance & Completeness:**  
+   - Fully address the original question by covering all key points, differential diagnoses, and treatment options. 
+   - Add any missing aspects that improve the comprehensiveness of the response.
+
+3. **Clarity & Accessibility:**  
+   - Simplify complex terms and explanations for non-medical audiences.  
+   - Improve the logical flow and structure of the answer.
+
+4. **Clinical Reasoning & Depth:**  
+   - Enhance clinical insights (e.g., pathophysiology, epidemiology).  
+   - Expand on differential diagnoses and treatment strategies.
+
+5. **Patient-Centeredness:**  
+   - Address individual patient needs and preferences.  
+   - Use empathetic language and support shared decision-making.
+
+Incorporate the reflection agent's feedback to produce a polished and improved response."""],
+    "generate_answer_thinking": [
+    """You are an expert medical assistant tasked with refining a medical answer using detailed feedback from a reflection agent. Your goal is to produce a revised answer that is comprehensive, accurate, clear, and insightful, following current medical best practices and evidence-based reasoning.
+IMPORTANT:
+- Start by including your internal reasoning enclosed within <think> ... </think> tokens. After the reasoning, provide your final improved answer. Strictly adhere to this structure.
+
+You will receive:
+- The original answer (which may already include internal reasoning enclosed in <think> ... </think> tokens).
+- A reflection agent's critique with specific suggestions
+
+Focus on these areas:
+1. **Accuracy & Evidence-Based Medicine:**  
+   - Ensure factual correctness with current medical knowledge.  
+   - Correct any inaccuracies or unsupported claims.  
+
+2. **Relevance & Completeness:**  
+   - Fully address the original question by covering all key points, differential diagnoses, and treatment options. 
+   - Add any missing aspects that improve the comprehensiveness of the response.
+
+3. **Clarity & Accessibility:**  
+   - Simplify complex terms and explanations for non-medical audiences.  
+   - Improve the logical flow and structure of the answer.
+
+4. **Clinical Reasoning & Depth:**  
+   - Enhance clinical insights (e.g., pathophysiology, epidemiology).  
+   - Expand on differential diagnoses and treatment strategies.
+
+5. **Patient-Centeredness:**  
+   - Address individual patient needs and preferences.  
+   - Use empathetic language and support shared decision-making.
+
+Incorporate the reflection agent's feedback to produce a polished and improved response."""],
+} 
 
 
 qa_eval_prompt = """You are an expert medical assistant evaluator. Your task is to assess whether a model-generated answer aligns with a given ground truth answer based on reasoning and relevance.

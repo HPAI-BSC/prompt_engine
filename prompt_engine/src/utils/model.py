@@ -90,7 +90,7 @@ class BaseModel(ABC):
         gc.collect()
         torch.cuda.empty_cache()
 
-class Model():
+class Model(BaseModel):
     def __init__(self, vllm_params):
         super().__init__(vllm_params)
         self.allowed_params = [
@@ -102,7 +102,6 @@ class Model():
         self.model = LLM(**vllm_params)
 
         
-
     def generate(self, prompts, sampling_params, batch_size=100, retry=0):
         for param in self.generation_config:
             if param not in sampling_params:
