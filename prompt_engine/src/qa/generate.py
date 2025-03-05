@@ -21,12 +21,8 @@ def generate(model, subject, config):
     else:
         sampling_params = None
     
-    if "ensembles" not in configuration:
-        configuration["ensembles"] = 5
     if "k" not in configuration:
-        configuration["k"] = 5
-    if "final_answer" not in configuration:
-        configuration["final_answer"] = "merge"
+        configuration["k"] = 0
 
     if "embedding" not in configuration or configuration["embedding"] is None:
         logger.info("Embedding not specified. Setting embedding to 'static'")
@@ -55,7 +51,7 @@ def generate(model, subject, config):
         if not database_path.endswith(".json"):
             database_path += ".json"
         database_examples = (os.path.basename(database_path), load_qa_database(database_path))
-        
+
         if datastore:
             datastore.embed_problems(database_path)
 
@@ -76,7 +72,7 @@ def generate(model, subject, config):
         k_out += f"_{reranker_name}"
 
     out_test_path = working_dir if working_dir is not None else GENERATIONS_PATH
-    out_test_path = os.path.join(out_test_path, "outputs", model_name, "QA", configuration["final_answer"], embedding_name, input_name, str(configuration["ensembles"]), k_out)
+    out_test_path = os.path.join(out_test_path, "outputs", model_name, "QA", embedding_name, input_name, k_out)
     os.makedirs(out_test_path, exist_ok=True)
 
     # Set default sampling parameters

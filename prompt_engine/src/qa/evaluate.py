@@ -61,7 +61,7 @@ def llm_evaluation(evaluator, problems):
             problems: dictionary of problems with the evaluations
             acc: list of accuracies of the evaluations
     """
-    
+
     ids = list(problems.keys())
     prompts = [
         evaluator.tokenizer.apply_chat_template(
@@ -197,13 +197,11 @@ def evaluate_from_config(subject, config, ip_server):
     # Build the path to the generations file
     model_name = os.path.basename(config["vllm"]["model"]) if "vllm" in config else os.path.basename(config["openai"]["model"])
 
-    final_answer_type = config["config"]["final_answer"] if "final_answer" in config["config"] else "merge"
-
     dataset_path = config["config"]["dataset"]
     if subject is not None:
         dataset_path = os.path.join(dataset_path, subject)
 
-    embedding = os.path.join("QA", final_answer_type, os.path.basename(config["config"]["embedding"]))
+    embedding = os.path.join("QA", os.path.basename(config["config"]["embedding"]))
 
     k_out = f"{config['config']['k']}k"
     if "database" in config["config"] and config["config"]["database"] is not None:
@@ -223,12 +221,7 @@ def evaluate_from_config(subject, config, ip_server):
     logger.info(f"Dataset: {dataset_path}")
     logger.info(f"K: {k_out}")
 
-    generations_path = os.path.join(working_dir, 
-                                    "outputs",
-                                    model_name, 
-                                    embedding, 
-                                    dataset_path,
-                                    str(config["config"]["ensembles"]), 
-                                    k_out)
+    generations_path = os.path.join(working_dir, "outputs", model_name, embedding, dataset_path, k_out)
+    
     # Evaluate the generations
     evaluate_from_path(generations_path, config, ip_server)
