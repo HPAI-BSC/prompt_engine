@@ -186,12 +186,11 @@ def evaluate_from_config(subject, config):
     
     # Build the path to the generations file
     model_name = os.path.basename(config["vllm"]["model"]) if "vllm" in config else os.path.basename(config["openai"]["model"])
-    ex_type = config["config"]["type"]
     dataset_path = config["config"]["dataset"]
     if subject is not None:
         dataset_path = os.path.join(dataset_path, subject)
 
-    if ex_type == "medprompt":
+    if "embedding" in config["config"] and config["config"]["embedding"] is not None:
         embedding = os.path.basename(config["config"]["embedding"])
     else:
         embedding = "SC-COT"
