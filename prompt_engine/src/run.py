@@ -90,7 +90,7 @@ def run(subjects, config, ip="localhost:6378"):
         
         if ex_type == "qa":
             module_generate = importlib.import_module("src.qa.generate")
-            module_evaluate = importlib.import_module("src.qa.evaluate")
+            module_evaluate = importlib.import_module("src.qa.evaluate") if "eval" in config["config"] and config["config"]["eval"] else None  
         else:
             module_generate = importlib.import_module("src.medprompt.generate")
             module_evaluate = importlib.import_module("src.medprompt.evaluate")
@@ -102,7 +102,8 @@ def run(subjects, config, ip="localhost:6378"):
             del model
             model = None
 
-        module_evaluate.evaluate_from_path(output_path, config)
+        if module_evaluate:
+            module_evaluate.evaluate_from_path(output_path, config, ip)
 
 
 if __name__ == "__main__":
