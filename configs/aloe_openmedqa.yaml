@@ -1,5 +1,5 @@
 vllm:
-  model: "HPAI-BSC/Llama3-Aloe-8B-Alpha"
+  model: HPAI-BSC/Llama3.1-Aloe-Beta-8B
   tokenizer_mode:
   trust_remote_code: true
   tensor_parallel_size:
@@ -16,18 +16,14 @@ vllm:
   max_model_len:
 
 config:
-  dataset: "medqa_4opt"
-  subject:
-  overwrite: True
-  type: "qa"
-  reward_model: /gpfs/projects/bsc70/hpai/storage/data/heka/Models/ArmoRM-Llama3-8B-v0.1
+  working_dir: /gpfs/projects/bsc70/hpai/storage/data/jordi/medprompt
+  eval: True
+  dataset: openmedqa
   final_answer: reflection
-  ensembles: 5
-  vector_database: "chromadb"
-  embedding: "Salesforce/SFR-Embedding-Mistral"
-  k: 5
-  database: "open_ended_medqa_database"
-
+  ensembles: 3
+  k: 3
+  embedding: NeuML/pubmedbert-base-embeddings
+  database: your_custom_database
 
 sampling_params:
   n:

@@ -1,5 +1,5 @@
 vllm:
-  model: "HPAI-BSC/Llama3-Aloe-8B-Alpha"
+  model: HPAI-BSC/Llama3.1-Aloe-Beta-8B
   tokenizer_mode:
   trust_remote_code:
   tensor_parallel_size:
@@ -16,16 +16,16 @@ vllm:
   max_model_len:
 
 config:
-  dataset: "mmlu"
-  subject: "all"
+  working_dir: /home/user/workdir
+  dataset: medqa_4opt
+  subject: all
   overwrite: True
-  type: "medprompt"
-  vector_database: "chromadb"
-  embedding: "Salesforce/SFR-Embedding-Mistral"
   k: 5
   ensembles: 5
   shuffle: True
-  database: "database_medmcqa_reduced"
+  vector_database: chromadb
+  embedding: NeuML/pubmedbert-base-embeddings
+  database: Medprompt-MedQA-R1
 
 sampling_params:
   n:
@@ -41,7 +41,7 @@ sampling_params:
   use_beam_search:
   length_penalty:
   early_stopping:
-  stop: ["<|im_end|>", "<|im_start|>", "[INST]", "[/INST]", "<s>", "</s>", "<|eot_id|>", "<|start_header_id|>"]
+  stop: ["<|im_end|>", "<|eot_id|>"]
   stop_token_ids:
   include_stop_str_in_output:
   ignore_eos:
@@ -51,3 +51,14 @@ sampling_params:
   skip_special_tokens:
   spaces_between_special_tokens:
   logits_processors:
+
+evaluators:
+  - model: deepseek-ai/DeepSeek-R1
+    trust_remote_code: True
+    tensor_parallel_size:
+    dtype:
+    seed:
+    gpu_memory_utilization:
+    enforce_eager:
+    max_model_len:
+    compare: False

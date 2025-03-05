@@ -1,0 +1,39 @@
+openai:
+  model: gemini-2.0-flash
+
+config:
+  working_dir: /home/user/workdir
+  batch_size: 10 # RPM
+  dataset: medqa_4opt
+  overwrite: True
+  shuffle: True
+  ensembles: 5
+  k: 5
+  vector_database: chromadb
+  embedding: NeuML/pubmedbert-base-embeddings
+  database: Medprompt-MedQA-R1
+
+sampling_params:
+  n:
+  best_of:
+  presence_penalty:
+  frequency_penalty:
+  repetition_penalty:
+  temperature:
+  top_p:
+  top_k:
+  min_p:
+  seed:
+  use_beam_search:
+  length_penalty:
+  early_stopping:
+  stop:
+  stop_token_ids:
+  include_stop_str_in_output:
+  ignore_eos:
+  max_tokens: 3000
+  logprobs:
+  prompt_logprobs:
+  skip_special_tokens:
+  spaces_between_special_tokens:
+  logits_processors:

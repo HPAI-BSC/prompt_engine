@@ -1,5 +1,5 @@
 vllm:
-  model: "Qwen/Qwen-72B"
+  model: Qwen/Qwen2.5-72B-Instruct
   tokenizer_mode:
   trust_remote_code: True
   tensor_parallel_size: 4
@@ -8,24 +8,24 @@ vllm:
   revision:
   tokenizer_revision:
   seed:
-  gpu_memory_utilization:
+  gpu_memory_utilization: 0.8
   swap_space:
   enforce_eager:
   max_context_len_to_capture:
   disable_custom_all_reduce:
-  max_model_len: 8192
+  max_model_len: 16384
 
 config:
-  dataset: "mmlu"
-  subject: "all"
+  working_dir: /home/user/workdir
+  dataset: mmlu
+  subject: all
   overwrite: True
-  type: "medprompt"
-  vector_database: "chromadb"
-  embedding: "NeuML/pubmedbert-base-embeddings"
   k: 5
   ensembles: 5
   shuffle: True
-  database: "database_medmcqa_reduced"
+  vector_database: chromadb
+  embedding: NeuML/pubmedbert-base-embeddings
+  database: Medprompt-MedMCQA-R1
 
 sampling_params:
   n:
@@ -45,7 +45,7 @@ sampling_params:
   stop_token_ids:
   include_stop_str_in_output:
   ignore_eos:
-  max_tokens: 500
+  max_tokens: 1000
   logprobs:
   prompt_logprobs:
   skip_special_tokens:
