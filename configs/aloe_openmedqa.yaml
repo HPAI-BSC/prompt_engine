@@ -50,19 +50,12 @@ sampling_params:
   spaces_between_special_tokens:
   logits_processors:
 
-evaluator:
-  model: meta-llama/Meta-Llama-3.1-70B-Instruct
-  tokenizer_mode:
-  trust_remote_code:
-  tensor_parallel_size: 4
-  dtype: bfloat16
-  quantization:
-  revision:
-  tokenizer_revision:
-  seed: 42
-  gpu_memory_utilization: 0.8
-  swap_space:
-  enforce_eager:
-  max_context_len_to_capture:
-  disable_custom_all_reduce:
-  max_model_len: 4096
+evaluators:
+  - model: deepseek-ai/DeepSeek-R1
+    trust_remote_code: True
+    tensor_parallel_size:
+    dtype:
+    seed:
+    gpu_memory_utilization:
+    enforce_eager:
+    max_model_len:
