@@ -16,7 +16,7 @@ vllm:
   max_model_len:
 
 config:
-  working_dir: /gpfs/projects/bsc70/hpai/storage/data/jordi/medprompt
+  working_dir: /home/user/workdir
   eval: True
   dataset: openmedqa
   final_answer: reflection
