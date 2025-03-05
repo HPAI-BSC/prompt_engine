@@ -13,7 +13,7 @@ prompt_engine: Evaluate your model using advanced prompt strategies
 </p>
 
 *Latest News* 🔥
-- [2025/03] [**Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval**] pre-print is now available in Arxiv! Main contributions:
+- [2025/03] [**Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval**](https://arxiv.org/abs/2409.15127) pre-print is now available in Arxiv! Main contributions:
   - Practical guide for cost-effective optimized context retrieval.
   - Improved the Pareto Frontier on MedQA with **open-source** models: DeepSeek-R1 and Aloe-Beta-70B.
   - We introduce **OpenMedQA**. a novel benchmark derived from MedQA, to rigorously evaluate open-ended medical question answering.
