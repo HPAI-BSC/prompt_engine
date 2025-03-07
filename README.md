@@ -42,8 +42,10 @@ Additionally, the repository supports Open-Ended QA datasets, allowing answer ge
 ## Implementation
 
 To effectively implement these novel techniques, we developed a specialized framework centered around accelerated inference speed and efficient data storage & retrieval mechanisms. Specifically, the architecture employs:
-- [**VLLM**](https://github.com/vllm-project/vllm): Fast Inference Very Large Language Model ibrary to facilitate rapid generation of responses in a efficient way.
-- Vector database:  Vector database solution to facilitate the storage and computation of vector similarities required for setting up the Medprompt technique. Both frameworks work in the self-hosted mode, storing the database locally under the "databases" path. We integrated two different vector database solutions:
+- [**VLLM**](https://github.com/vllm-project/vllm): Fast Inference Very Large Language Model library to facilitate rapid generation of responses in an efficient way. The repository allows:
+  - The use of the Offline mode of vLLM.
+  - The use of the vLLM OpenAI compatible server, for both, serving it locally or using an external API.
+- Vector database: Vector database solution to facilitate the storage and computation of vector similarities required for setting up the Medprompt technique. Both frameworks work in the self-hosted mode, storing the database locally under the "databases" path. We integrated two different vector database solutions:
     - [**ChromaDB**](https://github.com/chroma-core/chroma):. Open-source embedding database, focused on the simplicity and efficiency. only dense vectors are allowed.
     - [**Qdrant**](https://qdrant.tech/): Embedding database focused on production-ready service with a convenient API. It allows to use the database client by creating a docker image, using the local memory or in the cloud. In our implementation we use the local memory. It allows Sparse Vectors. We recommend to use this database only when dealing with Sparse Vectors.
 
@@ -59,14 +61,28 @@ A requirements file with the necessary packages is provided to install and execu
 pip install -r requirements.txt
 ```
 
+### Execution
+
 To execute the test. First, make sure you configured properly a YAML configuration file. Then, execute the following script:
 
 ```
-python prompt_engine/run.py configs/your_config.YAML
+python prompt_engine/run.py configs/aloe_medqa.yaml
 ```
 
+If you want to run a model already serving in your machine you can set the "--ip" and "--port" parameters:
+```
+python prompt_engine/run.py configs/qwen_72b.yaml --ip 127.0.0.1 --port 888
+```
+
+If the responses are already generated, the evaluation step can be ran by:
+```
+python prompt_engine/run_evaluation.py configs/qwen_72b.yaml
+```
+
+This is specially useful when evaluating **OpenMedQA** with a large LLM as a judge.
+
 ### Configure an execution
-To configure an execution of Medprompt or Self-Consistency CoT ensembling, a configuration file must be created. Some examples are included in the "/configs" folder. The configuration files define the parameters of the execution, model configuration, and sampling parameters. More details about the configuration parameters can be found [here](configs).
+To configure an execution, a configuration file must be created. Some examples are included in the "/configs" folder. The configuration files define the parameters of the execution, model configuration, sampling parameters, and the evaluators (only OpenMedQA). The system will automatically identify which type of execution (SC-CoT, Medprompt or Open-Ended QA) is being asked and will run it. More details about the configuration parameters can be found [here](configs).
 
 ### Datasets
 We include the following medical datasets formatted in the required format:
@@ -150,7 +166,7 @@ Each final directory will store the generations file of the exection, named "gen
           ...
       }
   }
-
+}
 ```
 
 
@@ -167,8 +183,10 @@ When the generations of an execution, the evaluation procedure starts, and gener
 - times_TIMESTAMP.json: Saves information about the time spent in each stage of the process.
 - incorrect_questions_TIMESTAMP: Stores the questions that resulted in an incorrect result after the majority voting.
 
+The outputs for **OpenMedQA** executions are slightly different, as it is not a mutliple-choice benchmark, but it follows the main structure.
+
 ### Databases
-When running Medprompt, we allow the utilization of custom databases. When a database is specified in the configuration, the generation of training/validation CoT examples will be skipped and the examples of the databases will be used instead. However, the database must have the same format as the output generations file, detailed above. Feel free to generate your custom databases to test the Medprompt technique.
+When running Medprompt, we allow the utilization of custom databases. When a database is specified in the configuration, the generation of training/validation CoT examples will be skipped and the examples of the databases will be used instead. However, the database must have the same format as the output generations file, detailed above. Feel free to generate your custom databases to test the Medprompt technique. We recommend the utilization of our databases. Download the json files from [here](https://huggingface.co/collections/HPAI-BSC/medical-context-retrieval-rag-67b0e0b0589983db691217cd), and move the files to the "prompt_engine/databases" path.
 
 ### Citations
 If you use this repository in a published work, please cite the following papers as sources:
