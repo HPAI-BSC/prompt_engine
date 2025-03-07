@@ -6,9 +6,9 @@ This directory hosts the datasets files. Currently supported and tested datasets
     - MMLU
     - MedMCQA
     - MedQA
-        - MedQA_4opt
-        - MedQA_5opt
     - PubmedQA
+    - OpenMedQA (Open-Ended Question-Answering)
+
 
 ## Structure of the directories
 Each dataset files are located in their own directory. Each dataset directory must contain at least two files for executing Medprompt, the validation/train examples and the test examples. However, to use SC-COT only the test file is needed.
@@ -51,3 +51,5 @@ Each dataset must be a JSON with the following custom format:
 }
 ```
 WARNING. The IDS of the questions must be unique.
+
+If using an Open-Ended QA dataset like OpenMedqa, the "options" field is not necessary.
