@@ -1,9 +1,14 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png">
-    <img alt="prompt_engine" src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" width=55%>
-  </picture>
-</p>
+<div align="center" id="promptenginetop">
+<img src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" alt="logo" width="350" margin="10px"></img>
+
+![GitHub License](https://img.shields.io/github/license/HPAI-BSC/prompt_engine)
+![GitHub followers](https://img.shields.io/github/followers/HPAI-BSC)
+![GitHub Repo stars](https://img.shields.io/github/stars/HPAI-BSC/prompt_engine)
+![GitHub forks](https://img.shields.io/github/forks/HPAI-BSC/prompt_engine)
+![GitHub watchers](https://img.shields.io/github/watchers/HPAI-BSC/prompt_engine)
+
+</div>
+
 <h2 align="center">
 prompt_engine: Evaluate your model using advanced prompt strategies
 </h2>
