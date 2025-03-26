@@ -10,7 +10,7 @@
 </div>
 
 <h2 align="center">
-prompt_engine: Evaluate your model using advanced prompt strategies
+Prompt Engine: Evaluate your model using advanced prompt strategies
 </h2>
 
 <p align="center">
