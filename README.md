@@ -1,21 +1,22 @@
 <div align="center" id="promptenginetop">
 <img src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" alt="logo" width="350" margin="10px"></img>
 
-![GitHub License](https://img.shields.io/github/license/HPAI-BSC/prompt_engine)
-![GitHub followers](https://img.shields.io/github/followers/HPAI-BSC)
-![GitHub Repo stars](https://img.shields.io/github/stars/HPAI-BSC/prompt_engine)
-![GitHub forks](https://img.shields.io/github/forks/HPAI-BSC/prompt_engine)
-![GitHub watchers](https://img.shields.io/github/watchers/HPAI-BSC/prompt_engine)
-
-</div>
-
 <h2 align="center">
 Prompt Engine: Evaluate your model using advanced prompt strategies
 </h2>
 
-<p align="center">
-| <a href="https://arxiv.org/abs/2409.15127"><b>Paper</b></a> | <a href="https://huggingface.co/collections/HPAI-BSC/healthcare-llms-aloe-family-6701b6a777f7e874a2123363"><b>Aloe Family Models</b></a> | <a href="https://hpai.bsc.es/"><b>HPAI Website</b></a> |
-</p>
+[![arXiv](https://img.shields.io/badge/arXiv-2409.15127-b31b1b.svg)](https://arxiv.org/abs/2409.15127)
+[![Static Badge](https://img.shields.io/badge/HPAI-Website-blue)](https://hpai.bsc.es/)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/HPAI-BSC)
+[![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://www.linkedin.com/company/hpai)
+[![Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff)](https://bsky.app/profile/hpai.bsky.social)
+![GitHub License](https://img.shields.io/github/license/HPAI-BSC/prompt_engine)
+![GitHub followers](https://img.shields.io/github/followers/HPAI-BSC)
+![GitHub Repo stars](https://img.shields.io/github/stars/HPAI-BSC/prompt_engine)
+
+</div>
+
+
 
 *Latest News* 🔥
 - [2025/03] [**Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval**](https://arxiv.org/abs/2409.15127) pre-print is now available in Arxiv! Main contributions:
