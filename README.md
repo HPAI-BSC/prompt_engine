@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png">
-    <img alt="prompt_engine" src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" width=55%>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.jpeg">
+    <img alt="prompt_engine" src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.jpeg" width=55%>
   </picture>
 </p>
 <h2 align="center">
@@ -40,6 +40,13 @@ Additionally, the repository supports Open-Ended QA datasets, allowing answer ge
 
 
 ## Implementation
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_features.png">
+    <img alt="prompt_engine" src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" width=55%>
+  </picture>
+</p>
 
 To effectively implement these novel techniques, we developed a specialized framework centered around accelerated inference speed and efficient data storage & retrieval mechanisms. Specifically, the architecture employs:
 - [**VLLM**](https://github.com/vllm-project/vllm): Fast Inference Very Large Language Model library to facilitate rapid generation of responses in an efficient way. The repository allows:
