@@ -1,21 +1,41 @@
-<div align="center" id="promptenginetop">
-<img src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" alt="logo" width="350" margin="10px"></img>
-
-<h2 align="center">
-Prompt Engine: Evaluate your model using advanced prompt strategies
-</h2>
-
-[![arXiv](https://img.shields.io/badge/arXiv-2409.15127-b31b1b.svg)](https://arxiv.org/abs/2409.15127)
-[![Static Badge](https://img.shields.io/badge/HPAI-Website-blue)](https://hpai.bsc.es/)
-[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/HPAI-BSC)
-[![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://www.linkedin.com/company/hpai)
-[![Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff)](https://bsky.app/profile/hpai.bsky.social)
-![GitHub License](https://img.shields.io/github/license/HPAI-BSC/prompt_engine)
-![GitHub followers](https://img.shields.io/github/followers/HPAI-BSC)
-![GitHub Repo stars](https://img.shields.io/github/stars/HPAI-BSC/prompt_engine)
-
+<div align="center">
+  <img src="https://raw.githubusercontent.com/HPAI-BSC/prompt_engine/main/images/prompt_engine_logo.png" width="400" alt="HPAI"/>
+  <h2 align="center">
+    Prompt Engine: Evaluate your model using advanced prompt strategies
+  </h2>
 </div>
-
+<div align="center" style="line-height: 1;">
+  <a href="https://hpai.bsc.es/" target="_blank" style="margin: 1px;">
+    <img alt="Web" src="https://img.shields.io/badge/Website-HPAI-8A2BE2" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://huggingface.co/HPAI-BSC" target="_blank" style="margin: 1px;">
+    <img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-HPAI-ffc107?color=ffc107&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://github.com/HPAI-BSC" target="_blank" style="margin: 1px;">
+    <img alt="GitHub" src="https://img.shields.io/badge/GitHub-HPAI-%23121011.svg?logo=github&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/HPAI-BSC/prompt_engine">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/followers/HPAI-BSC">
+</div>
+<div align="center" style="line-height: 1;">
+  <a href="https://www.linkedin.com/company/hpai" target="_blank" style="margin: 1px;">
+    <img alt="Linkedin" src="https://img.shields.io/badge/Linkedin-HPAI-blue" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://bsky.app/profile/hpai.bsky.social" target="_blank" style="margin: 1px;">
+    <img alt="BlueSky" src="https://img.shields.io/badge/Bluesky-HPAI-0285FF?logo=bluesky&logoColor=fff" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://linktr.ee/hpai_bsc" target="_blank" style="margin: 1px;">
+    <img alt="LinkTree" src="https://img.shields.io/badge/Linktree-HPAI-43E55E?style=flat&logo=linktree&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+</div>
+<div align="center" style="line-height: 1;">
+  <a href="https://arxiv.org/abs/2409.15127" target="_blank" style="margin: 1px;">
+    <img alt="Arxiv" src="https://img.shields.io/badge/arXiv-2409.15127-b31b1b.svg" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="LICENSE" style="margin: 1px;">
+    <img alt="License" src="https://img.shields.io/github/license/HPAI-BSC/prompt_engine" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+</div>
 
 
 *Latest News* 🔥
