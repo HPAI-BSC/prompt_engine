@@ -39,7 +39,8 @@
 
 
 *Latest News* 🔥
-- [2025/03] [**Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval**](https://arxiv.org/abs/2409.15127) pre-print is now available in Arxiv! Main contributions:
+- [2025/06/24] Paper accepted to the **AIAI 2025** conference! The article is now availabel as a chapter in the **Artificial Intelligence Applications and Innovations 2025** book in [Springer](https://link.springer.com/chapter/10.1007/978-3-031-96235-6_27).
+- [2025/03] [**Pareto-Optimized Open-Source LLMs for Healthcare via Context Retrieval**](https://arxiv.org/abs/2409.15127) pre-print is now available in Arxiv! Main contributions:
   - Practical guide for cost-effective optimized context retrieval.
   - Improved the Pareto Frontier on MedQA with **open-source** models: DeepSeek-R1 and Aloe-Beta-70B.
   - We introduce **OpenMedQA**. a novel benchmark derived from MedQA, to rigorously evaluate open-ended medical question answering.
@@ -226,15 +227,20 @@ If you use this repository in a published work, please cite the following papers
 
 Bayarri-Planas, J., Gururajan, A. K., and Garcia-Gasulla, D., 2024. Boosting Healthcare LLMs Through Retrieved Context. arXiv preprint arXiv:2409.15127.
 ```
-@misc{bayarriplanas2025costeffectivehighperformanceopensourcellms,
-      title={Cost-Effective, High-Performance Open-Source LLMs via Optimized Context Retrieval}, 
-      author={Jordi Bayarri-Planas and Ashwin Kumar Gururajan and Dario Garcia-Gasulla},
-      year={2025},
-      eprint={2409.15127},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2409.15127}, 
+@inprocedings{10.1007/978-3-031-96235-6_27,
+	author="Bayarri-Planas, Jordi and Gururajan, Ashwin Kumar and Garcia-Gasulla, Dario",
+	editor="Maglogiannis, Ilias and Iliadis, Lazaros and Andreou, Andreas and Papaleonidas, Antonios",
+	title="Pareto-Optimized Open-Source LLMs for Healthcare via Context Retrieval",
+	booktitle="Artificial Intelligence Applications and Innovations",
+	year="2025",
+	publisher="Springer Nature Switzerland",
+	address="Cham",
+	pages="374--388",
+	abstract="This study leverages optimized context retrieval to enhance open-source Large Language Models (LLMs) for cost-effective, high performance healthcare AI. We demonstrate that this approach achieves state-of-the-art accuracy on medical question answering at a fraction of the cost of proprietary models, significantly improving the cost-accuracy Pareto frontier on the MedQA benchmark. Key contributions include: (1) OpenMedQA, a novel benchmark revealing a performance gap in open-ended medical QA compared to multiple-choice formats; (2) a practical, reproducible pipeline for context retrieval optimization; and (3) open-source resources (Prompt Engine, CoT/ToT/Thinking databases) to empower healthcare AI development. By advancing retrieval techniques and QA evaluation, we enable more affordable and reliable LLM solutions for healthcare. All the materials have been made public here.",
+	isbn="978-3-031-96235-6"
 }
+
+
 ```
 
 Gururajan, A.K., Lopez-Cuena, E., Bayarri-Planas, J., Tormos, A., Hinjos, D., Bernabeu-Perez, P., Arias-Duart, A., Martin-Torres, P.A., Urcelay-Ganzabal, L., Gonzalez-Mallo, M. and Alvarez-Napagao, S., 2024. Aloe: A Family of Fine-tuned Open Healthcare LLMs. arXiv preprint arXiv:2405.01886.
